@@ -1,0 +1,857 @@
+/* Cores, medidas e áreas seguras compartilhadas pela página. */
+:root {
+    --bg:#f7f4fc;
+    --surface:#fff;
+    --text:#231a33;
+    --muted:#645a78;
+    --primary:#5b2a9e;
+    --primary2:#7e4bd6;
+    --accent:#c026d3;
+    --soft:#efe8fb;
+    --ok:#1f7a3d;
+    --warn:#a05a00;
+    --bad:#c62828;
+    --line:#e0d6f0;
+    --on:#fff;
+    box-sizing:border-box;
+    padding-top:env(safe-area-inset-top,0px);
+    padding-bottom:env(safe-area-inset-bottom,0px)
+}
+/* Usa o tema escuro do sistema, a menos que o usuário escolha o claro. */
+@media (prefers-color-scheme:dark) {
+    :root:not([data-theme="light"]) {
+        --bg:#150f21;
+        --surface:#1f1730;
+        --text:#ede7f8;
+        --muted:#b3a6cc;
+        --primary:#b794f6;
+        --primary2:#9f6bf0;
+        --accent:#e879f9;
+        --soft:#2a1f40;
+        --ok:#6fcf74;
+        --warn:#f0b34b;
+        --bad:#ff8a80;
+        --line:#37294f;
+        --on:#150f21
+    }
+}
+/* Aplica o tema escuro quando ele é escolhido no botão. */
+:root[data-theme="dark"] {
+    --bg:#150f21;
+    --surface:#1f1730;
+    --text:#ede7f8;
+    --muted:#b3a6cc;
+    --primary:#b794f6;
+    --primary2:#9f6bf0;
+    --accent:#e879f9;
+    --soft:#2a1f40;
+    --ok:#6fcf74;
+    --warn:#f0b34b;
+    --bad:#ff8a80;
+    --line:#37294f;
+    --on:#150f21
+}
+/* Evita que títulos fiquem escondidos ao navegar até uma seção. */
+html {
+    scroll-padding-top:env(safe-area-inset-top,0px)
+}
+* {
+    box-sizing:border-box
+}
+body {
+    margin:0;
+    background:var(--bg);
+    color:var(--text);
+    font:16px/1.65 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif
+}
+/* Estilos gerais da página e da barra de navegação fixa. */
+header {
+    background:var(--surface);
+    border-bottom:1px solid var(--line);
+    position:sticky;
+    top:env(safe-area-inset-top,0px);
+    z-index:5
+}
+.bar {
+    max-width:1040px;
+    margin:auto;
+    padding:.6rem 1rem;
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem 1rem;
+    align-items:center;
+    justify-content:space-between
+}
+.brand {
+    font-weight:800;
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    gap:.5rem;
+    letter-spacing:-.01em
+}
+.brand b {
+    display:inline-grid;
+    place-items:center;
+    width:30px;
+    height:30px;
+    border-radius:9px;
+    background:linear-gradient(135deg,var(--primary2),var(--accent));
+    color:#fff;
+    font-size:1rem
+}
+nav {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.2rem;
+    align-items:center
+}
+nav a {
+    padding:.4rem .75rem;
+    border-radius:99px;
+    color:var(--text);
+    text-decoration:none;
+    font-size:.92rem
+}
+nav a:hover {
+    background:var(--soft)
+}
+nav a.on {
+    background:var(--primary);
+    color:var(--on);
+    font-weight:600
+}
+.tg {
+    background:var(--soft);
+    color:var(--primary);
+    padding:.35rem .7rem;
+    font-size:.85rem
+}
+main {
+    max-width:1040px;
+    margin:auto;
+    padding:1.2rem 1rem 3rem
+}
+/* Exibe apenas a seção selecionada e anima sua entrada. */
+section.view {
+    display:none
+}
+section.view.on {
+    display:block;
+    animation:in .35s ease
+}
+@keyframes in {
+    from {
+        opacity:0;
+        transform:translateY(8px)
+    }
+    to {
+        opacity:1;
+        transform:none
+    }
+}
+/* Título e introdução de cada seção. */
+.ph {
+    background:linear-gradient(135deg,#3b1670,#7e4bd6 60%,#c026d3);
+    color:#fff;
+    border-radius:18px;
+    padding:1.6rem 1.5rem;
+    margin:.4rem 0 1.4rem
+}
+.ph h1 {
+    margin:0 0 .3rem;
+    color:#fff
+}
+.ph p {
+    margin:0;
+    opacity:.92;
+    max-width:62ch
+}
+/* Hierarquia visual de títulos e parágrafos. */
+h1 {
+    font-size:2rem;
+    line-height:1.2;
+    margin:.2rem 0 .8rem;
+    color:var(--primary);
+    letter-spacing:-.02em
+}
+h2 {
+    font-size:1.3rem;
+    margin:2.2rem 0 .7rem;
+    color:var(--primary);
+    display:flex;
+    align-items:center;
+    gap:.6rem
+}
+h2::before {
+    content:"";
+    width:6px;
+    height:1.1em;
+    border-radius:3px;
+    background:linear-gradient(var(--primary2),var(--accent))
+}
+p {
+    margin:.5rem 0
+}
+.muted {
+    color:var(--muted);
+    font-size:.9rem
+}
+/* Cartões e grades que organizam o conteúdo. */
+.card {
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1rem 1.2rem;
+    margin:1rem 0;
+    box-shadow:0 1px 2px rgba(60,20,110,.06)
+}
+.grid {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(230px,1fr));
+    gap:1rem
+}
+.grid .card {
+    margin:0
+}
+a.card {
+    display:block;
+    text-decoration:none;
+    color:inherit;
+    transition:transform .15s,border-color .15s
+}
+a.card:hover {
+    transform:translateY(-3px);
+    border-color:var(--primary2)
+}
+a.card .ic {
+    font-size:1.5rem;
+    display:block;
+    margin-bottom:.2rem
+}
+a.card strong {
+    color:var(--primary)
+}
+.tag {
+    display:inline-block;
+    font-size:.75rem;
+    padding:.15rem .6rem;
+    border-radius:99px;
+    background:var(--soft);
+    color:var(--primary);
+    font-weight:700;
+    letter-spacing:.03em
+}
+/* Destaques, estatísticas e passos da página inicial. */
+#v-inicio .hero {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1.5rem;
+    align-items:center;
+    background:linear-gradient(135deg,var(--soft),var(--surface));
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:1.6rem
+}
+.stats {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+    gap:.8rem;
+    margin-top:1rem
+}
+.stats div {
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:.8rem 1rem;
+    text-align:center
+}
+.stats b {
+    display:block;
+    font-size:1.8rem;
+    color:var(--primary);
+    line-height:1.1
+}
+.steps {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+    gap:1rem;
+    counter-reset:s
+}
+.steps div {
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:1rem;
+    counter-increment:s
+}
+.steps div::before {
+    content:counter(s);
+    display:grid;
+    place-items:center;
+    width:30px;
+    height:30px;
+    border-radius:50%;
+    background:var(--primary);
+    color:var(--on);
+    font-weight:700;
+    margin-bottom:.4rem
+}
+/* Ilustrações e animações dos elementos SVG. */
+svg {
+    max-width:100%;
+    height:auto
+}
+.anim-lock {
+    animation:pulse 2.4s ease-in-out infinite;
+    transform-origin:center
+}
+.anim-key {
+    animation:slide 3.2s ease-in-out infinite
+}
+.anim-ok {
+    animation:fade 3.2s ease-in-out infinite
+}
+@keyframes pulse {
+    50% {
+        transform:scale(1.06)
+    }
+}
+@keyframes slide {
+    0% {
+        transform:translateX(0)
+    }
+    50% {
+        transform:translateX(60px)
+    }
+    100% {
+        transform:translateX(0)
+    }
+}
+@keyframes fade {
+    0%,40% {
+        opacity:0
+    }
+    60%,100% {
+        opacity:1
+    }
+}
+/* Respeita a preferência do sistema por menos animações. */
+@media (prefers-reduced-motion:reduce) {
+    .anim-lock,.anim-key,.anim-ok,section.view.on {
+        animation:none
+    }
+}
+/* Campos, foco visível e barra de progresso. */
+input[type=text] {
+    width:100%;
+    padding:.65rem .85rem;
+    border:1px solid var(--line);
+    border-radius:10px;
+    background:var(--bg);
+    color:var(--text);
+    font:inherit
+}
+input[type=text]:focus,button:focus-visible,summary:focus-visible,a:focus-visible {
+    outline:3px solid var(--primary2);
+    outline-offset:2px
+}
+.meter {
+    height:12px;
+    background:var(--soft);
+    border-radius:99px;
+    overflow:hidden;
+    margin:.7rem 0
+}
+.meter i {
+    display:block;
+    height:100%;
+    width:0;
+    background:var(--bad);
+    transition:width .3s,background .3s
+}
+/* Tabelas, trechos de código e barras de comparação. */
+table {
+    border-collapse:collapse;
+    width:100%;
+    font-size:.92rem
+}
+th,td {
+    border-bottom:1px solid var(--line);
+    padding:.5rem;
+    text-align:left
+}
+th {
+    color:var(--primary)
+}
+.scroll {
+    overflow-x:auto
+}
+code {
+    font-family:ui-monospace,Consolas,monospace;
+    background:var(--soft);
+    padding:.05rem .35rem;
+    border-radius:5px;
+    word-break:break-all
+}
+.bars div {
+    display:flex;
+    align-items:center;
+    gap:.6rem;
+    margin:.4rem 0
+}
+.bars span.l {
+    width:70px;
+    font-size:.9rem
+}
+.bars span.b {
+    height:18px;
+    background:linear-gradient(90deg,var(--primary),var(--accent));
+    border-radius:5px
+}
+/* Elementos expansíveis, botões e mensagens de resposta. */
+details {
+    border-top:1px solid var(--line);
+    padding:.55rem 0
+}
+details:first-child {
+    border-top:0
+}
+summary {
+    cursor:pointer;
+    font-weight:600;
+    color:var(--text)
+}
+details[open]>summary {
+    color:var(--primary)
+}
+button {
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    color:var(--on);
+    border:0;
+    border-radius:10px;
+    padding:.55rem 1.1rem;
+    font:inherit;
+    font-weight:600;
+    cursor:pointer
+}
+button.alt {
+    background:var(--soft);
+    color:var(--primary)
+}
+button.opt {
+    background:var(--surface);
+    color:var(--text);
+    border:1px solid var(--line);
+    margin:.2rem .3rem .2rem 0
+}
+button.opt:hover {
+    border-color:var(--primary2)
+}
+.ck {
+    display:flex;
+    gap:.6rem;
+    align-items:flex-start;
+    padding:.4rem 0;
+    cursor:pointer
+}
+.ck input {
+    margin-top:.35rem;
+    width:18px;
+    height:18px;
+    accent-color:var(--primary)
+}
+.fb {
+    margin-top:.5rem;
+    padding:.5rem .8rem;
+    border-radius:10px;
+    background:var(--soft)
+}
+.fb.good {
+    border-left:4px solid var(--ok)
+}
+.fb.bad {
+    border-left:4px solid var(--bad)
+}
+.msg {
+    background:var(--bg);
+    border:1px dashed var(--line);
+    border-radius:10px;
+    padding:.6rem .9rem;
+    font-style:italic
+}
+.pager {
+    display:flex;
+    justify-content:space-between;
+    gap:1rem;
+    margin-top:2.2rem;
+    flex-wrap:wrap
+}
+details ul,details ol,.card ul,.card ol {
+    margin:.4rem 0;
+    padding-left:1.3rem
+}
+footer {
+    border-top:1px solid var(--line);
+    padding:1.2rem;
+    text-align:center;
+    color:var(--muted);
+    font-size:.85rem
+}
+/* Lista visual de critérios e código temporário de 2FA. */
+.rl {
+    list-style:none;
+    padding:0!important;
+    margin:.6rem 0
+}
+.rl li {
+    padding:.15rem 0
+}
+.rl li::before {
+    content:"○ ";
+    color:var(--muted)
+}
+.rl li.ok::before {
+    content:"● ";
+    color:var(--ok)
+}
+.rl li.ok {
+    color:var(--ok)
+}
+.otp-code {
+    font:700 2.2rem ui-monospace,Consolas,monospace;
+    letter-spacing:.25em;
+    color:var(--primary)
+}
+/* Controles e itens usados nos exercícios. */
+select {
+    padding:.45rem .6rem;
+    border-radius:8px;
+    border:1px solid var(--line);
+    background:var(--bg);
+    color:var(--text);
+    font:inherit;
+    max-width:100%
+}
+.pair {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    align-items:center;
+    margin:.5rem 0
+}
+.pair b {
+    min-width:120px
+}
+.q {
+    margin:1rem 0;
+    padding-bottom:1rem;
+    border-bottom:1px solid var(--line)
+}
+.q:last-child {
+    border:0
+}
+/* Abas e painéis de conteúdo. */
+.gt {
+    display:flex;
+    align-items:center;
+    gap:.6rem
+}
+.gt .n {
+    background:var(--soft);
+    color:var(--primary);
+    border-radius:99px;
+    padding:.1rem .7rem;
+    font-weight:700;
+    font-size:.85rem
+}
+.src a {
+    color:var(--primary)
+}
+.tabs {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem;
+    margin:0 0 1.2rem
+}
+.pill {
+    background:var(--surface);
+    color:var(--text);
+    border:1px solid var(--line);
+    border-radius:99px;
+    padding:.4rem .9rem;
+    font-weight:600;
+    font-size:.9rem
+}
+.pill.on {
+    background:linear-gradient(135deg,var(--primary),var(--primary2));
+    color:var(--on);
+    border-color:transparent
+}
+.panel {
+    display:none
+}
+.panel.on {
+    display:block;
+    animation:in .3s ease
+}
+.panel>h2 {
+    display:none
+}
+/* Cartões, equações e fluxos de informação. */
+.tiles {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(190px,1fr));
+    gap:.9rem
+}
+.tile {
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:16px;
+    padding:1rem;
+    text-align:center
+}
+.tile strong {
+    display:block;
+    color:var(--primary);
+    margin:.2rem 0
+}
+.tile p {
+    margin:0;
+    font-size:.9rem;
+    color:var(--muted)
+}
+.eq {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.7rem;
+    align-items:stretch;
+    justify-content:center
+}
+.eq .tile {
+    flex:1 1 180px;
+    max-width:250px
+}
+.eq .op {
+    align-self:center;
+    font-size:2rem;
+    font-weight:800;
+    color:var(--accent)
+}
+.flow {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.5rem;
+    align-items:center;
+    justify-content:center;
+    margin:1rem 0
+}
+.flow .node {
+    background:var(--soft);
+    border-radius:12px;
+    padding:.6rem .9rem;
+    text-align:center;
+    font-size:.9rem
+}
+.flow .ar {
+    font-size:1.4rem;
+    color:var(--accent);
+    font-weight:700
+}
+/* Etiquetas e comparações de riscos e opções. */
+.chips {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.4rem;
+    margin:.6rem 0
+}
+.chip {
+    background:var(--soft);
+    color:var(--primary);
+    border-radius:99px;
+    padding:.2rem .7rem;
+    font-size:.85rem;
+    font-weight:600
+}
+.chip.s {
+    background:rgba(198,40,40,.12);
+    color:var(--bad)
+}
+/* Colunas comparativas que se adaptam a telas estreitas. */
+.duo {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+    gap:1rem;
+    margin:1.2rem 0
+}
+.duo .card {
+    margin:0
+}
+.vs {
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:1rem
+}
+@media(max-width:560px) {
+    .vs {
+        grid-template-columns:1fr
+    }
+}
+.vs>div {
+    border-radius:16px;
+    padding:1rem;
+    border:1px solid var(--line);
+    background:var(--surface)
+}
+.vs .no {
+    border-top:5px solid var(--bad)
+}
+.vs .yes {
+    border-top:5px solid var(--ok)
+}
+.vs p {
+    margin:.4rem 0
+}
+/* Etapas, balões e exemplos de mensagens. */
+.stepper {
+    display:flex;
+    flex-wrap:wrap;
+    gap:.8rem
+}
+.stepper .st {
+    flex:1 1 150px;
+    background:var(--surface);
+    border:1px solid var(--line);
+    border-radius:14px;
+    padding:.8rem
+}
+.stepper .st b {
+    display:grid;
+    place-items:center;
+    width:28px;
+    height:28px;
+    border-radius:50%;
+    background:var(--primary);
+    color:var(--on);
+    margin-bottom:.3rem
+}
+.stepper .st p {
+    margin:0;
+    font-size:.92rem
+}
+.bub {
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:.9rem
+}
+.bub div {
+    border-radius:16px 16px 16px 4px;
+    padding:.8rem 1rem;
+    color:#fff;
+    font-size:.92rem
+}
+.bub b {
+    display:block;
+    font-size:.78rem;
+    text-transform:uppercase;
+    letter-spacing:.06em;
+    opacity:.92
+}
+.phone {
+    max-width:400px;
+    margin:.8rem auto;
+    border:3px solid var(--primary);
+    border-radius:26px;
+    padding:1rem;
+    background:var(--surface)
+}
+.phone .m {
+    background:var(--soft);
+    border-radius:14px 14px 14px 4px;
+    padding:.7rem .9rem;
+    margin:.4rem 0
+}
+/* E-mail fictício e trechos clicáveis para análise. */
+.mail {
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:var(--surface);
+    overflow:hidden
+}
+.mail .h {
+    background:var(--soft);
+    padding:.6rem .9rem;
+    font-size:.9rem
+}
+.mail .bd {
+    padding:1rem
+}
+.hot {
+    background:rgba(192,38,211,.15);
+    border-bottom:2px dashed var(--accent);
+    cursor:pointer;
+    border-radius:4px;
+    padding:0 .2rem
+}
+.hot.on {
+    background:var(--accent);
+    color:#fff
+}
+/* Ícones e ilustrações reutilizados nos cartões e botões. */
+.layers {
+    display:block;
+    margin:auto;
+    max-width:340px
+}
+.layers text {
+    font:600 11px system-ui;
+    fill:var(--text)
+}
+.ico {
+    width:56px;
+    height:56px;
+    display:block;
+    margin:0 auto .35rem
+}
+.ico.s {
+    width:22px;
+    height:22px;
+    display:inline-block;
+    margin:0;
+    vertical-align:-5px
+}
+.ico.s.big {
+    display:block;
+    width:34px;
+    height:34px;
+    margin:0 auto .25rem
+}
+.tile .ico,.card.big .ico {
+    transition:transform .2s
+}
+.tile:hover .ico,a.card:hover .ico {
+    animation:pulse 1.3s ease-in-out infinite
+}
+.card.big .ico {
+    margin:0 0 .4rem;
+    width:48px;
+    height:48px
+}
+a.card .ico {
+    margin:0 0 .3rem;
+    width:40px;
+    height:40px
+}
+.pill .ico.s {
+    margin-right:.25rem
+}
+.brand b svg {
+    width:20px;
+    height:20px
+}
+/* Também desativa animações de ícones para quem prefere menos movimento. */
+@media (prefers-reduced-motion:reduce) {
+    .tile:hover .ico,a.card:hover .ico {
+        animation:none
+    }
+}
