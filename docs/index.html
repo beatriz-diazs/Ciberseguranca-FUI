@@ -1,1438 +1,2338 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-        <title>Segurança Digital Pessoal</title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <body>
-        <!-- Símbolos SVG reutilizados nas ilustrações da página. -->
-        <svg width="0" height="0" style="position:absolute" aria-hidden="true">
-            <defs>
-                <symbol id="i-lock" viewBox="0 0 48 48">
-                    <rect x="10" y="21" width="28" height="22" rx="5" fill="var(--primary)"/>
-                    <path d="M16 21v-6a8 8 0 0 1 16 0v6" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-                    <circle cx="24" cy="31" r="3" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-unlock" viewBox="0 0 48 48">
-                    <rect x="10" y="21" width="28" height="22" rx="5" fill="var(--primary)"/>
-                    <path d="M16 21v-6a8 8 0 0 1 15-4" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-                    <circle cx="24" cy="31" r="3" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-shield" viewBox="0 0 48 48">
-                    <path d="M24 5l15 6v11c0 10-6 17-15 21C15 39 9 32 9 22V11z" fill="var(--primary)"/>
-                    <path d="M17 24l5 5 10-11" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-                </symbol>
-                <symbol id="i-doc" viewBox="0 0 48 48">
-                    <rect x="9" y="5" width="26" height="36" rx="4" fill="var(--primary)"/>
-                    <path d="M15 15h14M15 22h14M15 29h8" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
-                    <circle cx="34" cy="36" r="8" fill="var(--accent)"/>
-                    <path d="M30 36l3 3 5-6" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-clock" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="18" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M24 13v11l7 5" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-threat" viewBox="0 0 48 48">
-                    <circle cx="24" cy="15" r="8" fill="var(--primary)"/>
-                    <path d="M8 43c0-10 7-16 16-16s16 6 16 16z" fill="var(--primary)"/>
-                    <rect x="14" y="12" width="20" height="6" rx="3" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-burst" viewBox="0 0 48 48">
-                    <polygon points="24,3 29,16 42,10 35,22 46,26 34,31 40,44 26,37 20,46 17,33 4,32 14,23 6,12 19,15" fill="var(--accent)"/>
-                    <circle cx="24" cy="25" r="8" fill="var(--primary)"/>
-                </symbol>
-                <symbol id="i-key" viewBox="0 0 48 48">
-                    <circle cx="15" cy="24" r="9" fill="none" stroke="var(--accent)" stroke-width="5"/>
-                    <rect x="23" y="21" width="21" height="6" rx="2" fill="var(--accent)"/>
-                    <rect x="36" y="27" width="5" height="7" fill="var(--accent)"/>
-                    <rect x="29" y="27" width="4" height="5" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-vault" viewBox="0 0 48 48">
-                    <rect x="6" y="8" width="36" height="32" rx="5" fill="var(--primary)"/>
-                    <circle cx="24" cy="24" r="9" fill="var(--surface)"/>
-                    <circle cx="24" cy="24" r="3" fill="var(--accent)"/>
-                    <path d="M24 15v3M24 30v3M15 24h3M30 24h3" fill="none" stroke="var(--primary)" stroke-width="2.5" stroke-linecap="round"/>
-                </symbol>
-                <symbol id="i-phone" viewBox="0 0 48 48">
-                    <rect x="13" y="4" width="22" height="40" rx="5" fill="var(--primary)"/>
-                    <rect x="17" y="10" width="14" height="24" rx="2" fill="var(--surface)"/>
-                    <path d="M20 18h8M20 23h5" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
-                    <circle cx="24" cy="39" r="2" fill="var(--surface)"/>
-                </symbol>
-                <symbol id="i-refresh" viewBox="0 0 48 48">
-                    <path d="M38 22a14 14 0 0 0-26-6" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M10 26a14 14 0 0 0 26 6" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M12 8v9h9" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M36 40v-9h-9" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-disk" viewBox="0 0 48 48">
-                    <path d="M8 12v24c0 4 7 7 16 7s16-3 16-7V12z" fill="var(--primary)"/>
-                    <ellipse cx="24" cy="12" rx="16" ry="7" fill="var(--primary2)"/>
-                    <path d="M8 24c0 4 7 7 16 7s16-3 16-7" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                </symbol>
-                <symbol id="i-link" viewBox="0 0 48 48">
-                    <rect x="4" y="17" width="24" height="14" rx="7" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <rect x="20" y="17" width="24" height="14" rx="7" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-eyeoff" viewBox="0 0 48 48">
-                    <path d="M4 24c6-11 14-15 20-15s14 4 20 15c-6 11-14 15-20 15S10 35 4 24z" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="24" cy="24" r="6" fill="var(--primary)"/>
-                    <path d="M8 40L40 8" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-                </symbol>
-                <symbol id="i-eye" viewBox="0 0 48 48">
-                    <path d="M4 24c6-11 14-15 20-15s14 4 20 15c-6 11-14 15-20 15S10 35 4 24z" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="24" cy="24" r="7" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-user" viewBox="0 0 48 48">
-                    <circle cx="24" cy="15" r="9" fill="var(--primary)"/>
-                    <path d="M7 43c0-10 8-17 17-17s17 7 17 17z" fill="var(--primary)"/>
-                </symbol>
-                <symbol id="i-building" viewBox="0 0 48 48">
-                    <rect x="9" y="6" width="30" height="36" rx="3" fill="var(--primary)"/>
-                    <rect x="15" y="12" width="6" height="6" fill="var(--surface)"/>
-                    <rect x="27" y="12" width="6" height="6" fill="var(--surface)"/>
-                    <rect x="15" y="23" width="6" height="6" fill="var(--surface)"/>
-                    <rect x="27" y="23" width="6" height="6" fill="var(--surface)"/>
-                    <rect x="20" y="33" width="8" height="9" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-gear" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="17" fill="none" stroke="var(--primary)" stroke-width="6" stroke-dasharray="7 6.35"/>
-                    <circle cx="24" cy="24" r="12" fill="var(--primary)"/>
-                    <circle cx="24" cy="24" r="5" fill="var(--surface)"/>
-                </symbol>
-                <symbol id="i-bank" viewBox="0 0 48 48">
-                    <path d="M24 5L5 16h38z" fill="var(--primary)"/>
-                    <rect x="9" y="19" width="6" height="18" fill="var(--primary)"/>
-                    <rect x="21" y="19" width="6" height="18" fill="var(--primary)"/>
-                    <rect x="33" y="19" width="6" height="18" fill="var(--primary)"/>
-                    <rect x="5" y="39" width="38" height="5" rx="2" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-search" viewBox="0 0 48 48">
-                    <circle cx="21" cy="21" r="13" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="5"/>
-                    <path d="M31 31l12 12" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="6"/>
-                </symbol>
-                <symbol id="i-edit" viewBox="0 0 48 48">
-                    <path d="M8 40l3-11L33 7l8 8L19 37z" fill="var(--primary)"/>
-                    <path d="M8 40l3-11 8 8z" fill="var(--accent)"/>
-                    <path d="M29 11l8 8" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                </symbol>
-                <symbol id="i-trash" viewBox="0 0 48 48">
-                    <rect x="11" y="15" width="26" height="28" rx="4" fill="var(--primary)"/>
-                    <rect x="8" y="9" width="32" height="5" rx="2" fill="var(--accent)"/>
-                    <rect x="19" y="4" width="10" height="5" rx="2" fill="var(--accent)"/>
-                    <path d="M19 22v14M29 22v14" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-share" viewBox="0 0 48 48">
-                    <path d="M17 21l14-7M17 27l14 7" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                    <circle cx="12" cy="24" r="7" fill="var(--primary)"/>
-                    <circle cx="36" cy="12" r="6" fill="var(--accent)"/>
-                    <circle cx="36" cy="36" r="6" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-undo" viewBox="0 0 48 48">
-                    <path d="M14 18h16a10 10 0 0 1 0 20H16" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-                    <path d="M20 8l-10 10 10 10" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-                </symbol>
-                <symbol id="i-scale" viewBox="0 0 48 48">
-                    <path d="M24 6v34M12 41h24M8 14h32" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8 14L3 27h10zM40 14l-5 13h10z" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-cookie" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="19" fill="var(--primary)"/>
-                    <circle cx="17" cy="19" r="3" fill="var(--surface)"/>
-                    <circle cx="29" cy="16" r="2.5" fill="var(--surface)"/>
-                    <circle cx="30" cy="29" r="3.5" fill="var(--surface)"/>
-                    <circle cx="18" cy="31" r="2.5" fill="var(--surface)"/>
-                    <circle cx="36" cy="22" r="2" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-hourglass" viewBox="0 0 48 48">
-                    <path d="M12 5h24M12 43h24" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M14 5c0 10 10 12 10 19S14 38 14 43M34 5c0 10-10 12-10 19s10 14 10 19" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"/>
-                    <path d="M19 40c3-3 7-3 10 0v3H19z" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-pin" viewBox="0 0 48 48">
-                    <circle cx="24" cy="16" r="11" fill="var(--primary)"/>
-                    <circle cx="24" cy="16" r="4" fill="var(--surface)"/>
-                    <path d="M24 27v16" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round" stroke-width="4"/>
-                </symbol>
-                <symbol id="i-home" viewBox="0 0 48 48">
-                    <path d="M5 24L24 7l19 17" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M10 23v19h28V23L24 11z" fill="var(--primary)"/>
-                    <rect x="19" y="29" width="10" height="13" rx="2" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-fp" viewBox="0 0 48 48">
-                    <path d="M8 26a16 16 0 0 1 32 0M14 26a10 10 0 0 1 20 0v8M20 26a4 4 0 0 1 8 0v12" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M26 30v10" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-stop" viewBox="0 0 48 48">
-                    <polygon points="16,4 32,4 44,16 44,32 32,44 16,44 4,32 4,16" fill="var(--accent)"/>
-                    <rect x="13" y="21" width="22" height="6" rx="3" fill="var(--surface)"/>
-                </symbol>
-                <symbol id="i-mail" viewBox="0 0 48 48">
-                    <rect x="4" y="9" width="40" height="30" rx="5" fill="var(--primary)"/>
-                    <path d="M6 13l18 14 18-14" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-sms" viewBox="0 0 48 48">
-                    <path d="M6 8h36a2 2 0 0 1 2 2v22a2 2 0 0 1-2 2H22l-9 8v-8H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z" fill="var(--primary)"/>
-                    <circle cx="16" cy="21" r="2.5" fill="var(--surface)"/>
-                    <circle cx="24" cy="21" r="2.5" fill="var(--surface)"/>
-                    <circle cx="32" cy="21" r="2.5" fill="var(--surface)"/>
-                </symbol>
-                <symbol id="i-call" viewBox="0 0 48 48">
-                    <path d="M12 8c-2 13 5 28 22 32l6-6-8-6-5 4c-5-2-9-6-11-11l4-4-5-8z" fill="var(--primary)"/>
-                    <path d="M30 8a12 12 0 0 1 10 10M30 15a5 5 0 0 1 3 3" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-mask" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="19" fill="var(--primary)"/>
-                    <circle cx="17" cy="21" r="4" fill="var(--surface)"/>
-                    <circle cx="31" cy="21" r="4" fill="var(--surface)"/>
-                    <path d="M15 32c5 6 13 6 18 0" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M8 14h32" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
-                </symbol>
-                <symbol id="i-cart" viewBox="0 0 48 48">
-                    <path d="M4 7h7l5 22h22l4-16H14" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="19" cy="38" r="4" fill="var(--accent)"/>
-                    <circle cx="34" cy="38" r="4" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-coin" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="19" fill="var(--accent)"/>
-                    <circle cx="24" cy="24" r="14" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                    <text x="24" y="31" text-anchor="middle" font-size="20" font-weight="700" fill="#fff" font-family="system-ui">
-                        $ 
-                    </text>
-                </symbol>
-                <symbol id="i-robot" viewBox="0 0 48 48">
-                    <rect x="9" y="14" width="30" height="24" rx="6" fill="var(--primary)"/>
-                    <circle cx="18" cy="26" r="4" fill="var(--surface)"/>
-                    <circle cx="30" cy="26" r="4" fill="var(--surface)"/>
-                    <path d="M24 14V8" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <circle cx="24" cy="6" r="3" fill="var(--accent)"/>
-                    <rect x="3" y="22" width="4" height="8" rx="2" fill="var(--accent)"/>
-                    <rect x="41" y="22" width="4" height="8" rx="2" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-cloud" viewBox="0 0 48 48">
-                    <path d="M14 38a10 10 0 0 1-1-20 12 12 0 0 1 23 3 8.500 8.500 0 0 1-1 17z" fill="var(--primary)"/>
-                </symbol>
-                <symbol id="i-card" viewBox="0 0 48 48">
-                    <rect x="4" y="11" width="40" height="26" rx="5" fill="var(--primary)"/>
-                    <rect x="4" y="17" width="40" height="6" fill="var(--accent)"/>
-                    <rect x="10" y="29" width="12" height="3" rx="1.5" fill="var(--surface)"/>
-                </symbol>
-                <symbol id="i-chat" viewBox="0 0 48 48">
-                    <rect x="4" y="6" width="28" height="20" rx="6" fill="var(--primary)"/>
-                    <path d="M10 26v8l8-8z" fill="var(--primary)"/>
-                    <rect x="18" y="20" width="26" height="18" rx="6" fill="var(--accent)"/>
-                    <path d="M38 38v7l-7-7z" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-school" viewBox="0 0 48 48">
-                    <path d="M24 8L3 19l21 11 21-11z" fill="var(--primary)"/>
-                    <path d="M12 25v9c0 3 6 6 12 6s12-3 12-6v-9l-12 6z" fill="var(--primary2)"/>
-                    <rect x="41" y="19" width="3" height="14" fill="var(--accent)"/>
-                </symbol>
-                <symbol id="i-folder" viewBox="0 0 48 48">
-                    <path d="M4 12a3 3 0 0 1 3-3h12l5 6h17a3 3 0 0 1 3 3v21a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z" fill="var(--primary)"/>
-                    <path d="M4 21h40" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                </symbol>
-                <symbol id="i-leak" viewBox="0 0 48 48">
-                    <path d="M24 4C16 16 10 22 10 30a14 14 0 0 0 28 0c0-8-6-14-14-26z" fill="var(--accent)"/>
-                    <path d="M17 31a7 7 0 0 0 7 7" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-keyboard" viewBox="0 0 48 48">
-                    <rect x="3" y="12" width="42" height="26" rx="5" fill="var(--primary)"/>
-                    <g fill="var(--surface)">
-                        <rect x="8" y="17" width="4" height="4"/>
-                        <rect x="15" y="17" width="4" height="4"/>
-                        <rect x="22" y="17" width="4" height="4"/>
-                        <rect x="29" y="17" width="4" height="4"/>
-                        <rect x="36" y="17" width="4" height="4"/>
-                        <rect x="11" y="24" width="4" height="4"/>
-                        <rect x="18" y="24" width="4" height="4"/>
-                        <rect x="25" y="24" width="4" height="4"/>
-                        <rect x="32" y="24" width="4" height="4"/>
-                        <rect x="14" y="31" width="20" height="3"/>
-                    </g>
-                </symbol>
-                <symbol id="i-hash" viewBox="0 0 48 48">
-                    <rect x="9" y="5" width="30" height="38" rx="4" fill="var(--primary)"/>
-                    <text x="24" y="31" text-anchor="middle" font-size="24" font-weight="700" fill="#fff" font-family="system-ui">
-                        # 
-                    </text>
-                </symbol>
-                <symbol id="i-server" viewBox="0 0 48 48">
-                    <rect x="7" y="6" width="34" height="14" rx="4" fill="var(--primary)"/>
-                    <rect x="7" y="26" width="34" height="14" rx="4" fill="var(--primary)"/>
-                    <circle cx="14" cy="13" r="2" fill="var(--accent)"/>
-                    <circle cx="14" cy="33" r="2" fill="var(--accent)"/>
-                    <path d="M22 13h14M22 33h14" fill="none" stroke="var(--surface)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"/>
-                </symbol>
-                <symbol id="i-browser" viewBox="0 0 48 48">
-                    <rect x="4" y="7" width="40" height="34" rx="5" fill="var(--primary)"/>
-                    <path d="M4 12a5 5 0 0 1 5-5h30a5 5 0 0 1 5 5v4H4z" fill="var(--accent)"/>
-                    <circle cx="10" cy="11.500" r="1.800" fill="var(--surface)"/>
-                    <circle cx="16" cy="11.500" r="1.800" fill="var(--surface)"/>
-                </symbol>
-                <symbol id="i-globe" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="19" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <ellipse cx="24" cy="24" rx="8" ry="19" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M5 24h38" fill="none" stroke="var(--primary)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-check" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="20" fill="var(--ok)"/>
-                    <path d="M14 25l7 7 13-14" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-                </symbol>
-                <symbol id="i-x" viewBox="0 0 48 48">
-                    <circle cx="24" cy="24" r="20" fill="var(--bad)"/>
-                    <path d="M16 16l16 16M32 16L16 32" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round"/>
-                </symbol>
-            </defs>
-        </svg>
-        <!-- Cabeçalho com navegação e controle do tema. -->
-        <header>
-            <div class="bar">
-                <span class="brand"><b>
-                <svg viewBox="0 0 48 48" aria-hidden="true">
-                    <rect x="10" y="21" width="28" height="22" rx="5" fill="#fff"/>
-                    <path d="M16 21v-6a8 8 0 0 1 16 0v6" fill="none" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
-                </svg>
-                </b>Cibersegurança na prática</span>
-                <nav id="nav">
-                    <a href="#inicio">Início</a><a href="#fundamentos">Fundamentos</a><a href="#protecao">Proteção</a><a href="#riscos">Riscos e golpes</a><a href="#teste">Teste-se</a><button class="tg" id="tg" type="button" aria-label="Alternar tema claro ou escuro">Tema</button>
-                </nav>
-            </div>
-        </header>
-        <!-- Conteúdo principal, separado em seções navegáveis. -->
-        <main>
-            <!-- Início: apresenta o projeto e oferece atalhos para os temas. -->
-            <section class="view" id="v-inicio">
-                <div class="hero">
-                    <div>
-                        <span class="tag">Projeto pessoal · FUI · CEFET-MG</span>
-                        <h1>
-                            Cibersegurança e privacidade de dados 
-                        </h1>
-                        <p>
-                            Um guia curto sobre como proteger suas contas e seus dados na internet, reconhecer golpes e entender, na prática, como algumas dessas proteções funcionam. No fim, há jogos para você testar o que aprendeu. 
-                        </p>
-                        <p>
-                            <a href="#fundamentos"><button type="button">Começar</button></a> <a href="#teste"><button class="alt" type="button">Ir aos jogos</button></a>
-                        </p>
-                    </div>
-                    <svg viewBox="0 0 300 220" role="img" aria-label="Animação: uma chave percorre o caminho até um cadeado, que confirma o acesso">
-                        <rect x="10" y="10" width="280" height="200" rx="14" fill="none" stroke="var(--line)" stroke-width="2"/>
-                        <g class="anim-lock">
-                            <rect x="190" y="95" width="70" height="55" rx="8" fill="var(--primary)"/>
-                            <path d="M205 95v-18a20 20 0 0 1 40 0v18" fill="none" stroke="var(--primary)" stroke-width="8"/>
-                        </g>
-                        <g class="anim-key">
-                            <circle cx="50" cy="122" r="16" fill="none" stroke="var(--accent)" stroke-width="7"/>
-                            <rect x="64" y="118" width="55" height="8" fill="var(--accent)"/>
-                            <rect x="100" y="126" width="7" height="12" fill="var(--accent)"/>
-                        </g>
-                        <g class="anim-ok">
-                            <circle cx="225" cy="123" r="12" fill="var(--ok)"/>
-                            <path d="M219 123l5 5 8-10" fill="none" stroke="#fff" stroke-width="3"/>
-                        </g>
-                        <text x="150" y="190" text-anchor="middle" fill="var(--muted)" font-size="13">
-                            Autenticação: chave válida, acesso liberado 
-                        </text>
-                    </svg>
-                </div>
-                <div class="duo">
-                    <div class="card big">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-shield"/>
-                        </svg>
-                        <h3 style="margin:.2rem 0">
-                            Cibersegurança 
-                        </h3>
-                        <p>
-                            É tudo o que se faz para proteger computadores, celulares, redes e dados contra acessos indevidos e ataques. Vale para o aplicativo do banco, para as redes sociais e para os arquivos que você guarda na nuvem. 
-                        </p>
-                    </div>
-                    <div class="card big">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-eye"/>
-                        </svg>
-                        <h3 style="margin:.2rem 0">
-                            Privacidade de dados 
-                        </h3>
-                        <p>
-                            É o direito de saber e de decidir o que acontece com as suas informações: quem coleta, para que usa, por quanto tempo guarda e com quem compartilha. No Brasil, a LGPD (Lei 13.709/2018) estabelece essas regras. 
-                        </p>
-                    </div>
-                </div>
-                <div class="vs">
-                    <div class="yes">
-                        <strong>A segurança pergunta</strong>
-                        <p>
-                            Meus dados estão protegidos contra acesso indevido, alteração e perda? 
-                        </p>
-                    </div>
-                    <div class="yes">
-                        <strong>A privacidade pergunta</strong>
-                        <p>
-                            Quem decide o que é feito com os meus dados? 
-                        </p>
-                    </div>
-                </div>
-                <h2>
-                    Por onde seus dados passam 
-                </h2>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-chat"/>
-                        </svg>
-                        <strong>Redes sociais</strong>
-                        <p>
-                            Fotos, contatos e conversas 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-card"/>
-                        </svg>
-                        <strong>Banco e Pix</strong>
-                        <p>
-                            Dinheiro e códigos de acesso 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-cart"/>
-                        </svg>
-                        <strong>Compras</strong>
-                        <p>
-                            Pagamento e endereço 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-cloud"/>
-                        </svg>
-                        <strong>Nuvem</strong>
-                        <p>
-                            Arquivos e documentos 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-school"/>
-                        </svg>
-                        <strong>Estudos</strong>
-                        <p>
-                            E-mail e plataformas 
-                        </p>
-                    </div>
-                </div>
-                <h2>
-                    Por onde seguir 
-                </h2>
-                <div class="grid">
-                    <a class="card" href="#fundamentos">
-                    <svg class="ico" aria-hidden="true">
-                        <use href="#i-doc"/>
-                    </svg>
-                    <strong>Fundamentos</strong>
-                    <p>
-                        Os conceitos, explicados com diagramas. 
-                    </p>
-                    </a> <a class="card" href="#protecao">
-                    <svg class="ico" aria-hidden="true">
-                        <use href="#i-shield"/>
-                    </svg>
-                    <strong>Proteção</strong>
-                    <p>
-                        Camadas de defesa e bons hábitos. 
-                    </p>
-                    </a> <a class="card" href="#riscos">
-                    <svg class="ico" aria-hidden="true">
-                        <use href="#i-mask"/>
-                    </svg>
-                    <strong>Riscos e golpes</strong>
-                    <p>
-                        Como os golpes aparecem e como reconhecê-los. 
-                    </p>
-                    </a> <a class="card" href="#teste">
-                    <svg class="ico" aria-hidden="true">
-                        <use href="#i-key"/>
-                    </svg>
-                    <strong>Teste-se</strong>
-                    <p>
-                        Quiz e jogos práticos. 
-                    </p>
-                    </a>
-                </div>
-            </section>
-            <!-- Fundamentos: conceitos de segurança, privacidade e dados. -->
-            <section class="view" id="v-fundamentos">
-                <div class="ph">
-                    <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">Parte 1</span>
-                    <h1>
-                        Fundamentos 
-                    </h1>
-                    <p>
-                        Sete temas curtos. Escolha um nas abas e siga na ordem que preferir. 
-                    </p>
-                </div>
-                <h2 data-t="Tríade CIA">
-                    Tríade CIA 
-                </h2>
-                <p>
-                    A segurança da informação costuma ser explicada por três princípios. 
-                </p>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-lock"/>
-                        </svg>
-                        <strong>Confidencialidade</strong>
-                        <p>
-                            Só vê a informação quem tem autorização, como acontece com a sua conta. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-doc"/>
-                        </svg>
-                        <strong>Integridade</strong>
-                        <p>
-                            O dado não muda sem permissão, como um documento que ninguém altera às escondidas. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-clock"/>
-                        </svg>
-                        <strong>Disponibilidade</strong>
-                        <p>
-                            A informação está lá quando você precisa dela. 
-                        </p>
-                    </div>
-                </div>
-                <h2 data-t="Ameaça e risco">
-                    Ameaça, vulnerabilidade e risco 
-                </h2>
-                <p>
-                    Os três termos se encaixam. Veja um exemplo com senhas. 
-                </p>
-                <div class="eq">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-unlock"/>
-                        </svg>
-                        <strong>Vulnerabilidade</strong>
-                        <p>
-                            A fraqueza. Aqui, usar a mesma senha em várias contas. 
-                        </p>
-                    </div>
-                    <span class="op">+</span>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-threat"/>
-                        </svg>
-                        <strong>Ameaça</strong>
-                        <p>
-                            Quem pode explorar a fraqueza. Aqui, alguém testando essa senha em outros serviços. 
-                        </p>
-                    </div>
-                    <span class="op">=</span>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-burst"/>
-                        </svg>
-                        <strong>Risco</strong>
-                        <p>
-                            O prejuízo possível. Aqui, várias contas comprometidas de uma vez. 
-                        </p>
-                    </div>
-                </div>
-                <h2 data-t="Senhas e HTTPS">
-                    Senhas e conexão segura 
-                </h2>
-                <h3>
-                    O que o sistema faz quando você digita a senha 
-                </h3>
-                <div class="flow">
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-keyboard"/>
-                        </svg>
-                        Você digita<br><code>test</code>
-                    </div>
-                    <span class="ar">→</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-gear"/>
-                        </svg>
-                        Função hash<br>(SHA-256) 
-                    </div>
-                    <span class="ar">→</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-hash"/>
-                        </svg>
-                        <code>9f86d081…0a08</code>
-                    </div>
-                    <span class="ar">→</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-check"/>
-                        </svg>
-                        Compara com o hash guardado 
-                    </div>
-                </div>
-                <p>
-                    O sistema não precisa guardar a sua senha, só o hash dela. Se o hash calculado for igual ao guardado, o acesso é liberado. Como não há como desfazer o cálculo, quem vê o hash não consegue simplesmente ler a senha. Dá para ver isso acontecendo no Laboratório de senhas, em <a href="#teste">Teste-se</a>. 
-                </p>
-                <h3>
-                    O que o https faz pelo caminho 
-                </h3>
-                <div class="flow">
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-browser"/>
-                        </svg>
-                        Navegador 
-                    </div>
-                    <span class="ar">→ cifrado (TLS) →</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-server"/>
-                        </svg>
-                        Servidor 
-                    </div>
-                </div>
-                <p>
-                    Quando o endereço começa com https, o TLS cifra os dados no trajeto entre o navegador e o servidor. Isso impede que outras pessoas da mesma rede, como num Wi-Fi público, leiam o que trafega. O cadeado, porém, não prova que o site é de confiança. 
-                </p>
-                <h2 data-t="Dados pessoais">
-                    Dados pessoais e sensíveis 
-                </h2>
-                <h3>
-                    Dados pessoais 
-                </h3>
-                <p>
-                    São informações que identificam uma pessoa, sozinhas ou combinadas com outras. 
-                </p>
-                <div class="chips">
-                    <span class="chip ">Nome</span><span class="chip ">CPF</span><span class="chip ">RG</span><span class="chip ">Endereço</span><span class="chip ">Telefone</span><span class="chip ">E-mail</span><span class="chip ">Data de nascimento</span><span class="chip ">Localização</span><span class="chip ">Fotografias</span><span class="chip ">Endereço IP (conforme o contexto)</span>
-                </div>
-                <h3>
-                    Dados sensíveis 
-                </h3>
-                <p>
-                    A LGPD trata essas categorias com regras mais rígidas. 
-                </p>
-                <div class="chips">
-                    <span class="chip s">Origem racial ou étnica</span><span class="chip s">Convicção religiosa</span><span class="chip s">Opinião política</span><span class="chip s">Filiação sindical</span><span class="chip s">Saúde</span><span class="chip s">Vida sexual</span><span class="chip s">Dados genéticos</span><span class="chip s">Biometria</span>
-                </div>
-                <h2 data-t="LGPD">
-                    LGPD 
-                </h2>
-                <h3>
-                    Quem participa 
-                </h3>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-user"/>
-                        </svg>
-                        <strong>Titular</strong>
-                        <p>
-                            Dono dos dados 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-building"/>
-                        </svg>
-                        <strong>Controlador</strong>
-                        <p>
-                            Decide como os dados são tratados 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-gear"/>
-                        </svg>
-                        <strong>Operador</strong>
-                        <p>
-                            Trata os dados em nome do controlador 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-bank"/>
-                        </svg>
-                        <strong>ANPD</strong>
-                        <p>
-                            Fiscaliza o cumprimento da lei 
-                        </p>
-                    </div>
-                </div>
-                <h3>
-                    O que você pode pedir 
-                </h3>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-search"/>
-                        </svg>
-                        <strong>Acessar</strong>
-                        <p>
-                            Confirmar se tratam seus dados e consultá-los 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-edit"/>
-                        </svg>
-                        <strong>Corrigir</strong>
-                        <p>
-                            Dados errados ou desatualizados 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-trash"/>
-                        </svg>
-                        <strong>Eliminar</strong>
-                        <p>
-                            Dados desnecessários ou excessivos 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-share"/>
-                        </svg>
-                        <strong>Saber</strong>
-                        <p>
-                            Com quem seus dados foram compartilhados 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-undo"/>
-                        </svg>
-                        <strong>Revogar</strong>
-                        <p>
-                            Retirar o consentimento 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-scale"/>
-                        </svg>
-                        <strong>Revisar</strong>
-                        <p>
-                            Decisões tomadas só por sistemas automáticos 
-                        </p>
-                    </div>
-                </div>
-                <h3>
-                    O que a lei exige de quem usa seus dados 
-                </h3>
-                <div class="chips">
-                    <span class="chip ">Finalidade</span><span class="chip ">Adequação</span><span class="chip ">Necessidade</span><span class="chip ">Transparência</span><span class="chip ">Segurança</span><span class="chip ">Prevenção</span><span class="chip ">Responsabilização</span>
-                </div>
-                <h2 data-t="Cookies">
-                    Cookies e rastreamento 
-                </h2>
-                <p>
-                    Cookies são pequenos registros que o navegador guarda. Muitos são úteis, como os que mantêm você conectado ou lembram o carrinho de compras. O problema são os que acompanham a sua navegação para montar um perfil. 
-                </p>
-                <div class="flow">
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-globe"/>
-                        </svg>
-                        Você visita um site 
-                    </div>
-                    <span class="ar">→</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-cookie"/>
-                        </svg>
-                        O navegador guarda um cookie 
-                    </div>
-                    <span class="ar">→</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-refresh"/>
-                        </svg>
-                        Na próxima visita, o site reconhece você 
-                    </div>
-                </div>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-hourglass"/>
-                        </svg>
-                        <strong>Sessão</strong>
-                        <p>
-                            Dura enquanto você navega 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-pin"/>
-                        </svg>
-                        <strong>Persistente</strong>
-                        <p>
-                            Fica até vencer ou ser apagado 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-home"/>
-                        </svg>
-                        <strong>Próprio</strong>
-                        <p>
-                            Definido pelo site que você visita 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-eye"/>
-                        </svg>
-                        <strong>De terceiros</strong>
-                        <p>
-                            Definido por outro domínio, como o de anúncios 
-                        </p>
-                    </div>
-                </div>
-                <div class="card" style="display:flex;gap:1rem;align-items:center">
-                    <svg class="ico" aria-hidden="true">
-                        <use href="#i-fp"/>
-                    </svg>
-                    <p style="margin:0">
-                        Mesmo sem cookies, é possível reconhecer um aparelho pela combinação de sistema, navegador, idioma e configurações. Essa técnica se chama <strong>fingerprinting</strong>. 
-                    </p>
-                </div>
-                <h2 data-t="No cotidiano">
-                    Por que isso importa no dia a dia 
-                </h2>
-                <p>
-                    Pense em um dia comum conectado. É só um exemplo, mas mostra quantas vezes seus dados circulam. 
-                </p>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-chat"/>
-                        </svg>
-                        <strong>De manhã</strong>
-                        <p>
-                            Mensagens e redes sociais 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-card"/>
-                        </svg>
-                        <strong>Ao meio-dia</strong>
-                        <p>
-                            Compras e Pix 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-school"/>
-                        </svg>
-                        <strong>À tarde</strong>
-                        <p>
-                            Estudos e e-mail 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-cloud"/>
-                        </svg>
-                        <strong>À noite</strong>
-                        <p>
-                            Fotos e arquivos na nuvem 
-                        </p>
-                    </div>
-                </div>
-                <div class="card">
-                    <p>
-                        Em cada uma dessas etapas, seus dados passam por uma plataforma. Quando faltam cuidados, eles ficam expostos a golpes e a acessos indevidos. E nem a melhor senha ajuda se a pessoa for enganada e entregar a informação por conta própria. Por isso, saber reconhecer golpes também faz parte da segurança. 
-                    </p>
-                </div>
-            </section>
-            <!-- Proteção: hábitos e medidas para proteger contas e dados. -->
-            <section class="view" id="v-protecao">
-                <div class="ph">
-                    <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">Parte 2</span>
-                    <h1>
-                        Proteção 
-                    </h1>
-                    <p>
-                        Camadas de defesa, hábitos que valem a pena e o que fazer se algo der errado. 
-                    </p>
-                </div>
-                <h2 data-t="Camadas">
-                    Camadas de defesa 
-                </h2>
-                <svg class="layers" viewBox="0 0 300 300" role="img" aria-label="Camadas de defesa, de fora para dentro: atenção a golpes, atualizações e cópias, autenticação em dois fatores, senha forte, dados">
-                    <circle cx="150" cy="150" r="140" fill="var(--soft)" stroke="var(--primary2)" stroke-width="2"/>
-                    <circle cx="150" cy="150" r="108" fill="var(--surface)" stroke="var(--primary2)" stroke-width="2"/>
-                    <circle cx="150" cy="150" r="76" fill="var(--soft)" stroke="var(--primary2)" stroke-width="2"/>
-                    <circle cx="150" cy="150" r="46" fill="var(--surface)" stroke="var(--primary2)" stroke-width="2"/>
-                    <circle cx="150" cy="150" r="22" fill="var(--primary)"/>
-                    <text x="150" y="30" text-anchor="middle">
-                        Atenção a golpes 
-                    </text>
-                    <text x="150" y="62" text-anchor="middle">
-                        Atualizações e backups 
-                    </text>
-                    <text x="150" y="94" text-anchor="middle">
-                        2FA 
-                    </text>
-                    <text x="150" y="124" text-anchor="middle">
-                        Senha forte 
-                    </text>
-                    <text x="150" y="154" text-anchor="middle" style="fill:#fff">
-                        Dados 
-                    </text>
-                </svg>
-                <p class="muted" style="text-align:center">
-                    Se uma camada falha, as outras ainda protegem. Nenhuma funciona bem sozinha. 
-                </p>
-                <h2 data-t="Mecanismos">
-                    Mecanismos de proteção 
-                </h2>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-key"/>
-                        </svg>
-                        <strong>Senhas fortes e únicas</strong>
-                        <p>
-                            Longas, difíceis de adivinhar e diferentes em cada conta. Uma frase com várias palavras sem relação costuma ser fácil de lembrar. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-vault"/>
-                        </svg>
-                        <strong>Gerenciador de senhas</strong>
-                        <p>
-                            Guarda e gera as senhas por você. Só exige uma senha mestra, que merece cuidado extra. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-phone"/>
-                        </svg>
-                        <strong>Dois fatores (2FA)</strong>
-                        <p>
-                            Pede um segundo comprovante além da senha, como um código temporário. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-refresh"/>
-                        </svg>
-                        <strong>Atualizações</strong>
-                        <p>
-                            Mantenha o sistema e os aplicativos em dia. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-disk"/>
-                        </svg>
-                        <strong>Cópias de segurança</strong>
-                        <p>
-                            Guarde os arquivos importantes em mais de um lugar. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-link"/>
-                        </svg>
-                        <strong>Conferir links</strong>
-                        <p>
-                            Olhe o endereço antes de informar qualquer dado. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-eyeoff"/>
-                        </svg>
-                        <strong>Privacidade</strong>
-                        <p>
-                            Revise permissões de aplicativos, cookies e configurações das redes sociais. 
-                        </p>
-                    </div>
-                </div>
-                <p class="muted">
-                    Dá para praticar três deles em <a href="#teste">Teste-se</a>: Leia o endereço, Laboratório de senhas e Simulador de 2FA. 
-                </p>
-                <h2 data-t="Vantagens">
-                    Vantagens de adotar bons hábitos 
-                </h2>
-                <div class="vs">
-                    <div class="no">
-                        <strong>Sem esses hábitos</strong>
-                        <p>
-                            <svg class="ico s" aria-hidden="true">
-                                <use href="#i-x"/>
-                            </svg>
-                            Um vazamento compromete várias contas. 
-                        </p>
-                        <p>
-                            <svg class="ico s" aria-hidden="true">
-                                <use href="#i-x"/>
-                            </svg>
-                            Só a senha basta para invadir. 
-                        </p>
-                        <p>
-                            <svg class="ico s" aria-hidden="true">
-                                <use href="#i-x"/>
-                            </svg>
-                            A pressa leva ao clique errado. 
-                        </p>
-                        <p>
-                            <svg class="ico s" aria-hidden="true">
-                                <use href="#i-x"/>
-                            </svg>
-                            Um problema no aparelho pode apagar tudo. 
-                        </p>
-                    </div>
-                    <div class="yes">
-                        <strong>Com esses hábitos</strong>
-                        <p>
-                            <svg class="ico s" aria-hidden="true">
-                                <use href="#i-check"/>
-                            </svg>
-                            Um vazamento fica restrito a um serviço. 
-                        </p>
-                        <p>
-                            <svg class="ico s" aria-hidden="true">
-                                <use href="#i-check"/>
-                            </svg>
-                            O segundo fator barra quem só tem a senha. 
-                        </p>
-                        <p>
-                            <svg class="ico s" aria-hidden="true">
-                                <use href="#i-check"/>
-                            </svg>
-                            Verificar antes interrompe o golpe. 
-                        </p>
-                        <p>
-                            <svg class="ico s" aria-hidden="true">
-                                <use href="#i-check"/>
-                            </svg>
-                            As cópias permitem recuperar os arquivos. 
-                        </p>
-                    </div>
-                </div>
-                <h2 data-t="Regra de ouro">
-                    Regra de ouro 
-                </h2>
-                <p>
-                    Para quase todo golpe, três passos resolvem. 
-                </p>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-stop"/>
-                        </svg>
-                        <strong>Pare</strong>
-                        <p>
-                            Golpes dependem de pressa. Antes de clicar, pagar ou passar um código, respire. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-search"/>
-                        </svg>
-                        <strong>Verifique</strong>
-                        <p>
-                            Veja o link, o remetente e se o pedido faz sentido. 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-call"/>
-                        </svg>
-                        <strong>Confirme</strong>
-                        <p>
-                            Fale com a pessoa ou com a empresa por um canal que você já conhece. 
-                        </p>
-                    </div>
-                </div>
-                <h2 data-t="Se a senha vazou">
-                    Se a senha vazou 
-                </h2>
-                <p>
-                    Se desconfiar que uma senha foi exposta, faça nesta ordem. 
-                </p>
-                <div class="stepper">
-                    <div class="st">
-                        <b>1</b>
-                        <p>
-                            Troque a senha da conta afetada. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>2</b>
-                        <p>
-                            Troque a mesma senha nos outros serviços em que ela aparece. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>3</b>
-                        <p>
-                            Ative a verificação em dois fatores. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>4</b>
-                        <p>
-                            Procure acessos que você não reconhece. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>5</b>
-                        <p>
-                            Confira se os dados de recuperação da conta continuam corretos. 
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <!-- Riscos: mostra consequências e formas comuns de golpe. -->
-            <section class="view" id="v-riscos">
-                <div class="ph">
-                    <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">Parte 3</span>
-                    <h1>
-                        Riscos e golpes 
-                    </h1>
-                    <p>
-                        O que pode acontecer sem proteção e como os golpes costumam aparecer. 
-                    </p>
-                </div>
-                <h2 data-t="Riscos">
-                    Riscos de não usar proteção 
-                </h2>
-                <div class="flow">
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-leak"/>
-                        </svg>
-                        Vazamento em um serviço 
-                    </div>
-                    <span class="ar">→</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-key"/>
-                        </svg>
-                        Mesma senha em outras contas 
-                    </div>
-                    <span class="ar">→</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-unlock"/>
-                        </svg>
-                        Contas invadidas 
-                    </div>
-                    <span class="ar">→</span>
-                    <div class="node">
-                        <svg class="ico s big" aria-hidden="true">
-                            <use href="#i-coin"/>
-                        </svg>
-                        Fraude 
-                    </div>
-                </div>
-                <p class="muted" style="text-align:center">
-                    Testar de forma automática, em vários serviços, senhas que já vazaram se chama credential stuffing. 
-                </p>
-                <div class="tiles">
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-folder"/>
-                        </svg>
-                        <strong>Vazamento de dados</strong>
-                        <p>
-                            Nomes, e-mails e telefones expostos 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-unlock"/>
-                        </svg>
-                        <strong>Contas invadidas</strong>
-                        <p>
-                            Acesso por quem não tem autorização 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-coin"/>
-                        </svg>
-                        <strong>Prejuízo financeiro</strong>
-                        <p>
-                            Perda de dinheiro e de códigos 
-                        </p>
-                    </div>
-                    <div class="tile">
-                        <svg class="ico" aria-hidden="true">
-                            <use href="#i-mask"/>
-                        </svg>
-                        <strong>Uso da sua identidade</strong>
-                        <p>
-                            Golpes aplicados em seu nome 
-                        </p>
-                    </div>
-                </div>
-                <h2 data-t="Engenharia social">
-                    Como a engenharia social funciona 
-                </h2>
-                <p>
-                    Em vez de atacar o sistema, o golpista ataca a pessoa. Ele usa emoções para que você aja antes de verificar. 
-                </p>
-                <div class="bub">
-                    <div style="background:#6d28d9">
-                        <b>Medo</b>“Sua conta será bloqueada.” 
-                    </div>
-                    <div style="background:#a21caf">
-                        <b>Urgência</b>“Responda agora.” 
-                    </div>
-                    <div style="background:#1d4ed8">
-                        <b>Confiança</b>“Sou do seu banco.” 
-                    </div>
-                    <div style="background:#0f766e">
-                        <b>Curiosidade</b>“Veja quem visitou seu perfil.” 
-                    </div>
-                    <div style="background:#b45309">
-                        <b>Ganância</b>“Prêmio garantido, retire já.” 
-                    </div>
-                    <div style="background:#be185d">
-                        <b>Solidariedade</b>“Preciso de ajuda, é uma emergência.” 
-                    </div>
-                </div>
-                <h2 data-t="Exemplos de golpes">
-                    Exemplos de golpes 
-                </h2>
-                <p class="muted">
-                    Situações como estas aparecem nos fascículos do CERT.br e em materiais do NIC.br. As mensagens abaixo foram escritas como exemplo. Escolha um tipo. 
-                </p>
-                <div class="tabs" id="gpt">
-                </div>
-                <div class="phone" id="gpv">
-                </div>
-                <h2 data-t="Anatomia de um phishing">
-                    Anatomia de um phishing 
-                </h2>
-                <p class="muted">
-                    Toque nas partes destacadas do e-mail fictício. 
-                </p>
-                <div class="mail">
-                    <div class="h">
-                        De: <span class="hot" data-i="0">atendimento@banco-exemplo-seguranca.example</span><br>Assunto: <span class="hot" data-i="1">URGENTE: conta bloqueada</span>
-                    </div>
-                    <div class="bd">
-                        <p>
-                            Detectamos um acesso suspeito. Atualize seus dados <span class="hot" data-i="2">em até 2 horas</span> ou sua conta será bloqueada. 
-                        </p>
-                        <p>
-                            <span class="hot" data-i="3">[ Atualizar agora ]</span>
-                        </p>
-                    </div>
-                </div>
-                <div class="fb" id="ana">
-                    Escolha uma parte destacada. 
-                </div>
-                <h3>
-                    Outros sinais de alerta 
-                </h3>
-                <div class="chips">
-                    <span class="chip s">Pedido de senha ou código</span><span class="chip s">Ameaça de bloqueio</span><span class="chip s">Oferta boa demais</span><span class="chip s">Conhecido com número novo</span><span class="chip s">Pedido de dinheiro sem como confirmar</span>
-                </div>
-                <p class="muted">
-                    Nem todo golpe tem erros de escrita. Alguns são bem elaborados e usam dados reais da vítima. 
-                </p>
-                <h2 data-t="Se caiu em um golpe">
-                    Se caiu em um golpe 
-                </h2>
-                <p>
-                    Quanto antes você agir, melhor. 
-                </p>
-                <div class="stepper">
-                    <div class="st">
-                        <b>1</b>
-                        <p>
-                            Troque as senhas das contas que possam ter sido afetadas. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>2</b>
-                        <p>
-                            Fale com o banco ou a instituição pelos canais oficiais. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>3</b>
-                        <p>
-                            Verifique movimentações suspeitas. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>4</b>
-                        <p>
-                            Avise as plataformas envolvidas. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>5</b>
-                        <p>
-                            Guarde mensagens e comprovantes. 
-                        </p>
-                    </div>
-                    <div class="st">
-                        <b>6</b>
-                        <p>
-                            Alerte pessoas próximas, caso alguém use a sua identidade. 
-                        </p>
-                    </div>
-                </div>
-            </section>
-            <!-- Testes: reúne atividades interativas preenchidas pelo script.js. -->
-            <section class="view" id="v-teste">
-                <div class="ph">
-                    <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">Parte 4</span>
-                    <h1>
-                        Teste seus conhecimentos 
-                    </h1>
-                    <p>
-                        Seis atividades. As simples revisam o conteúdo; as técnicas mostram o mecanismo funcionando no seu navegador. 
-                    </p>
-                </div>
-                <h2 class="gt" data-t="1 · Quiz">
-                    <span class="n">1</span>Quiz geral 
-                </h2>
-                <!-- O JavaScript cria as perguntas e as respostas do quiz. -->
-                <div class="card" id="quiz">
-                </div>
-                <h2 class="gt" data-t="2 · Golpe ou não?">
-                    <span class="n">2</span>Golpe ou não? 
-                </h2>
-                <!-- O JavaScript apresenta mensagens para identificar golpes. -->
-                <div class="card" id="scam">
-                    <p class="muted">
-                        Mensagens fictícias, criadas para este site. 
-                    </p>
-                </div>
-                <h2 class="gt" data-t="3 · Endereço (técnico)">
-                    <span class="n">3</span>Leia o endereço <span class="tag">técnico</span>
-                </h2>
-                <!-- Exercício interativo sobre como conferir endereços. -->
-                <div class="card" id="url">
-                </div>
-                <h2 class="gt" data-t="4 · Senhas (técnico)">
-                    <span class="n">4</span>Laboratório de senhas <span class="tag">técnico</span>
-                </h2>
-                <!-- Laboratório que avalia uma senha fictícia no navegador. -->
-                <div class="card">
-                    <p class="muted">
-                        Use uma senha fictícia. A análise ocorre no seu navegador; nada é enviado a servidores. 
-                    </p>
-                    <input type="text" id="pw" placeholder="Digite uma senha de teste" autocomplete="off">
-                    <ul class="rl" id="rules">
-                    </ul>
-                    <div class="meter">
-                        <i id="mt"></i>
-                    </div>
-                    <p>
-                        <strong id="lv">Aguardando entrada</strong>
-                    </p>
-                    <p id="ent" class="muted">
-                    </p>
-                    <p>
-                        SHA-256 da senha: <code id="h1">…</code>
-                    </p>
-                    <p>
-                        Com um “1” acrescentado ao final: <code id="h2">…</code>
-                    </p>
-                    <p id="diff" class="muted">
-                    </p>
-                    <p class="muted">
-                        Como ler: a estimativa de tempo supõe caracteres escolhidos ao acaso e 10 bilhões de tentativas por segundo (valor hipotético para ataque a hashes obtidos em vazamento). Senhas com padrão previsível resistem menos do que o número indica. O efeito de mudar poucos bits no hash vem do projeto da função: uma pequena mudança na entrada altera cerca de metade dos bits da saída. 
-                    </p>
-                </div>
-                <h2 class="gt" data-t="5 · 2FA (técnico)">
-                    <span class="n">5</span>Simulador de 2FA <span class="tag">técnico</span>
-                </h2>
-                <!-- Simulador de códigos temporários usados no 2FA. -->
-                <div class="card">
-                    <p>
-                        Aplicativos autenticadores geram códigos com o algoritmo TOTP (RFC 6238): o servidor e o aplicativo compartilham um segredo e calculam o mesmo código a partir da hora. 
-                    </p>
-                    <p class="otp-code" id="otp">
-                        ······ 
-                    </p>
-                    <div class="meter">
-                        <i id="otm" style="width:100%;background:var(--primary)"></i>
-                    </div>
-                    <p class="muted" id="otd">
-                    </p>
-                    <p>
-                        Passos: (1) contador = tempo Unix ÷ 30 s; (2) HMAC-SHA1 do contador com o segredo; (3) truncamento dinâmico para 31 bits; (4) resto da divisão por 1.000.000. 
-                    </p>
-                    <p>
-                        Simule um login: a senha já está correta. Digite o código atual. 
-                    </p>
-                    <div class="pair">
-                        <input type="text" id="oin" inputmode="numeric" maxlength="6" placeholder="000000" style="max-width:140px"><button type="button" id="ob">Entrar</button>
-                    </div>
-                    <div id="of">
-                    </div>
-                    <p class="muted">
-                        O segredo desta demonstração é fixo e público no código da página; em uso real ele é aleatório e fica só no aplicativo e no servidor. 
-                    </p>
-                </div>
-                <h2 class="gt" data-t="6 · Termos">
-                    <span class="n">6</span>Ligue os termos 
-                </h2>
-                <!-- O JavaScript monta o exercício de associação de termos. -->
-                <div class="card" id="match">
-                </div>
-            </section>
-        </main>
-        <!-- Rodapé com informações do projeto e fontes consultadas. -->
-        <footer>
-            <p>
-                Projeto pessoal · Fundamentos de Informática · CEFET-MG Divinópolis 
-            </p>
-            <details class="src" style="max-width:640px;margin:auto;text-align:left">
-                <summary>
-                    Fontes consultadas 
-                </summary>
-                <ul>
-                    <li>
-                        CERT.br. Cartilha de Segurança para Internet e fascículos. <a href="https://cartilha.cert.br/" target="_blank" rel="noopener">cartilha.cert.br</a>
-                    </li>
-                    <li>
-                        NIST. Digital Identity Guidelines, SP 800-63B. <a href="https://pages.nist.gov/800-63-4/sp800-63b.html" target="_blank" rel="noopener">pages.nist.gov</a>
-                    </li>
-                    <li>
-                        NIC.br. Cidadão na Rede. <a href="https://cidadaonarede.nic.br/" target="_blank" rel="noopener">cidadaonarede.nic.br</a>
-                    </li>
-                    <li>
-                        Brasil. Lei 13.709/2018 (LGPD). <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" target="_blank" rel="noopener">planalto.gov.br</a>
-                    </li>
-                    <li>
-                        ANPD. Perguntas frequentes, direitos dos titulares e guia de cookies. <a href="https://www.gov.br/anpd/" target="_blank" rel="noopener">gov.br/anpd</a>
-                    </li>
-                    <li>
-                        IETF. RFC 6238, TOTP. <a href="https://www.rfc-editor.org/rfc/rfc6238" target="_blank" rel="noopener">rfc-editor.org</a>
-                    </li>
-                </ul>
-            </details>
-        </footer>
-        <script src="script.js"></script>
-    </body>
+ <head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1, viewport-fit=cover" name="viewport"/>
+  <title>
+   Segurança Digital Pessoal
+  </title>
+  <link href="style.css" rel="stylesheet"/>
+ </head>
+ <body>
+  <svg aria-hidden="true" height="0" style="position:absolute" width="0">
+   <defs>
+    <symbol id="i-lock" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="22" rx="5" width="28" x="10" y="21">
+     </rect>
+     <path d="M16 21v-6a8 8 0 0 1 16 0v6" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+     </path>
+     <circle cx="24" cy="31" fill="var(--accent)" r="3">
+     </circle>
+    </symbol>
+    <symbol id="i-unlock" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="22" rx="5" width="28" x="10" y="21">
+     </rect>
+     <path d="M16 21v-6a8 8 0 0 1 15-4" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+     </path>
+     <circle cx="24" cy="31" fill="var(--accent)" r="3">
+     </circle>
+    </symbol>
+    <symbol id="i-shield" viewbox="0 0 48 48">
+     <path d="M24 5l15 6v11c0 10-6 17-15 21C15 39 9 32 9 22V11z" fill="var(--primary)">
+     </path>
+     <path d="M17 24l5 5 10-11" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+     </path>
+    </symbol>
+    <symbol id="i-doc" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="36" rx="4" width="26" x="9" y="5">
+     </rect>
+     <path d="M15 15h14M15 22h14M15 29h8" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+     </path>
+     <circle cx="34" cy="36" fill="var(--accent)" r="8">
+     </circle>
+     <path d="M30 36l3 3 5-6" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+     </path>
+    </symbol>
+    <symbol id="i-clock" viewbox="0 0 48 48">
+     <circle cx="24" cy="24" fill="none" r="18" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </circle>
+     <path d="M24 13v11l7 5" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+    </symbol>
+    <symbol id="i-threat" viewbox="0 0 48 48">
+     <circle cx="24" cy="15" fill="var(--primary)" r="8">
+     </circle>
+     <path d="M8 43c0-10 7-16 16-16s16 6 16 16z" fill="var(--primary)">
+     </path>
+     <rect fill="var(--accent)" height="6" rx="3" width="20" x="14" y="12">
+     </rect>
+    </symbol>
+    <symbol id="i-burst" viewbox="0 0 48 48">
+     <polygon fill="var(--accent)" points="24,3 29,16 42,10 35,22 46,26 34,31 40,44 26,37 20,46 17,33 4,32 14,23 6,12 19,15">
+     </polygon>
+     <circle cx="24" cy="25" fill="var(--primary)" r="8">
+     </circle>
+    </symbol>
+    <symbol id="i-key" viewbox="0 0 48 48">
+     <circle cx="15" cy="24" fill="none" r="9" stroke="var(--accent)" stroke-width="5">
+     </circle>
+     <rect fill="var(--accent)" height="6" rx="2" width="21" x="23" y="21">
+     </rect>
+     <rect fill="var(--accent)" height="7" width="5" x="36" y="27">
+     </rect>
+     <rect fill="var(--accent)" height="5" width="4" x="29" y="27">
+     </rect>
+    </symbol>
+    <symbol id="i-vault" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="32" rx="5" width="36" x="6" y="8">
+     </rect>
+     <circle cx="24" cy="24" fill="var(--surface)" r="9">
+     </circle>
+     <circle cx="24" cy="24" fill="var(--accent)" r="3">
+     </circle>
+     <path d="M24 15v3M24 30v3M15 24h3M30 24h3" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-width="2.5">
+     </path>
+    </symbol>
+    <symbol id="i-phone" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="40" rx="5" width="22" x="13" y="4">
+     </rect>
+     <rect fill="var(--surface)" height="24" rx="2" width="14" x="17" y="10">
+     </rect>
+     <path d="M20 18h8M20 23h5" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-width="3">
+     </path>
+     <circle cx="24" cy="39" fill="var(--surface)" r="2">
+     </circle>
+    </symbol>
+    <symbol id="i-refresh" viewbox="0 0 48 48">
+     <path d="M38 22a14 14 0 0 0-26-6" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <path d="M10 26a14 14 0 0 0 26 6" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <path d="M12 8v9h9" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <path d="M36 40v-9h-9" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+    </symbol>
+    <symbol id="i-disk" viewbox="0 0 48 48">
+     <path d="M8 12v24c0 4 7 7 16 7s16-3 16-7V12z" fill="var(--primary)">
+     </path>
+     <ellipse cx="24" cy="12" fill="var(--primary2)" rx="16" ry="7">
+     </ellipse>
+     <path d="M8 24c0 4 7 7 16 7s16-3 16-7" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-link" viewbox="0 0 48 48">
+     <rect fill="none" height="14" rx="7" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" width="24" x="4" y="17">
+     </rect>
+     <rect fill="none" height="14" rx="7" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5" width="24" x="20" y="17">
+     </rect>
+    </symbol>
+    <symbol id="i-eyeoff" viewbox="0 0 48 48">
+     <path d="M4 24c6-11 14-15 20-15s14 4 20 15c-6 11-14 15-20 15S10 35 4 24z" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <circle cx="24" cy="24" fill="var(--primary)" r="6">
+     </circle>
+     <path d="M8 40L40 8" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+     </path>
+    </symbol>
+    <symbol id="i-eye" viewbox="0 0 48 48">
+     <path d="M4 24c6-11 14-15 20-15s14 4 20 15c-6 11-14 15-20 15S10 35 4 24z" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <circle cx="24" cy="24" fill="var(--accent)" r="7">
+     </circle>
+    </symbol>
+    <symbol id="i-user" viewbox="0 0 48 48">
+     <circle cx="24" cy="15" fill="var(--primary)" r="9">
+     </circle>
+     <path d="M7 43c0-10 8-17 17-17s17 7 17 17z" fill="var(--primary)">
+     </path>
+    </symbol>
+    <symbol id="i-building" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="36" rx="3" width="30" x="9" y="6">
+     </rect>
+     <rect fill="var(--surface)" height="6" width="6" x="15" y="12">
+     </rect>
+     <rect fill="var(--surface)" height="6" width="6" x="27" y="12">
+     </rect>
+     <rect fill="var(--surface)" height="6" width="6" x="15" y="23">
+     </rect>
+     <rect fill="var(--surface)" height="6" width="6" x="27" y="23">
+     </rect>
+     <rect fill="var(--accent)" height="9" width="8" x="20" y="33">
+     </rect>
+    </symbol>
+    <symbol id="i-gear" viewbox="0 0 48 48">
+     <circle cx="24" cy="24" fill="none" r="17" stroke="var(--primary)" stroke-dasharray="7 6.35" stroke-width="6">
+     </circle>
+     <circle cx="24" cy="24" fill="var(--primary)" r="12">
+     </circle>
+     <circle cx="24" cy="24" fill="var(--surface)" r="5">
+     </circle>
+    </symbol>
+    <symbol id="i-bank" viewbox="0 0 48 48">
+     <path d="M24 5L5 16h38z" fill="var(--primary)">
+     </path>
+     <rect fill="var(--primary)" height="18" width="6" x="9" y="19">
+     </rect>
+     <rect fill="var(--primary)" height="18" width="6" x="21" y="19">
+     </rect>
+     <rect fill="var(--primary)" height="18" width="6" x="33" y="19">
+     </rect>
+     <rect fill="var(--accent)" height="5" rx="2" width="38" x="5" y="39">
+     </rect>
+    </symbol>
+    <symbol id="i-search" viewbox="0 0 48 48">
+     <circle cx="21" cy="21" fill="none" r="13" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
+     </circle>
+     <path d="M31 31l12 12" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="6">
+     </path>
+    </symbol>
+    <symbol id="i-edit" viewbox="0 0 48 48">
+     <path d="M8 40l3-11L33 7l8 8L19 37z" fill="var(--primary)">
+     </path>
+     <path d="M8 40l3-11 8 8z" fill="var(--accent)">
+     </path>
+     <path d="M29 11l8 8" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-trash" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="28" rx="4" width="26" x="11" y="15">
+     </rect>
+     <rect fill="var(--accent)" height="5" rx="2" width="32" x="8" y="9">
+     </rect>
+     <rect fill="var(--accent)" height="5" rx="2" width="10" x="19" y="4">
+     </rect>
+     <path d="M19 22v14M29 22v14" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+     </path>
+    </symbol>
+    <symbol id="i-share" viewbox="0 0 48 48">
+     <path d="M17 21l14-7M17 27l14 7" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+     </path>
+     <circle cx="12" cy="24" fill="var(--primary)" r="7">
+     </circle>
+     <circle cx="36" cy="12" fill="var(--accent)" r="6">
+     </circle>
+     <circle cx="36" cy="36" fill="var(--accent)" r="6">
+     </circle>
+    </symbol>
+    <symbol id="i-undo" viewbox="0 0 48 48">
+     <path d="M14 18h16a10 10 0 0 1 0 20H16" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+     </path>
+     <path d="M20 8l-10 10 10 10" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+     </path>
+    </symbol>
+    <symbol id="i-scale" viewbox="0 0 48 48">
+     <path d="M24 6v34M12 41h24M8 14h32" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <path d="M8 14L3 27h10zM40 14l-5 13h10z" fill="var(--accent)">
+     </path>
+    </symbol>
+    <symbol id="i-cookie" viewbox="0 0 48 48">
+     <circle cx="24" cy="24" fill="var(--primary)" r="19">
+     </circle>
+     <circle cx="17" cy="19" fill="var(--surface)" r="3">
+     </circle>
+     <circle cx="29" cy="16" fill="var(--surface)" r="2.5">
+     </circle>
+     <circle cx="30" cy="29" fill="var(--surface)" r="3.5">
+     </circle>
+     <circle cx="18" cy="31" fill="var(--surface)" r="2.5">
+     </circle>
+     <circle cx="36" cy="22" fill="var(--accent)" r="2">
+     </circle>
+    </symbol>
+    <symbol id="i-hourglass" viewbox="0 0 48 48">
+     <path d="M12 5h24M12 43h24" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <path d="M14 5c0 10 10 12 10 19S14 38 14 43M34 5c0 10-10 12-10 19s10 14 10 19" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+     </path>
+     <path d="M19 40c3-3 7-3 10 0v3H19z" fill="var(--accent)">
+     </path>
+    </symbol>
+    <symbol id="i-pin" viewbox="0 0 48 48">
+     <circle cx="24" cy="16" fill="var(--primary)" r="11">
+     </circle>
+     <circle cx="24" cy="16" fill="var(--surface)" r="4">
+     </circle>
+     <path d="M24 27v16" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+     </path>
+    </symbol>
+    <symbol id="i-home" viewbox="0 0 48 48">
+     <path d="M5 24L24 7l19 17" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <path d="M10 23v19h28V23L24 11z" fill="var(--primary)">
+     </path>
+     <rect fill="var(--accent)" height="13" rx="2" width="10" x="19" y="29">
+     </rect>
+    </symbol>
+    <symbol id="i-fp" viewbox="0 0 48 48">
+     <path d="M8 26a16 16 0 0 1 32 0M14 26a10 10 0 0 1 20 0v8M20 26a4 4 0 0 1 8 0v12" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <path d="M26 30v10" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+    </symbol>
+    <symbol id="i-stop" viewbox="0 0 48 48">
+     <polygon fill="var(--accent)" points="16,4 32,4 44,16 44,32 32,44 16,44 4,32 4,16">
+     </polygon>
+     <rect fill="var(--surface)" height="6" rx="3" width="22" x="13" y="21">
+     </rect>
+    </symbol>
+    <symbol id="i-mail" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="30" rx="5" width="40" x="4" y="9">
+     </rect>
+     <path d="M6 13l18 14 18-14" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+     </path>
+    </symbol>
+    <symbol id="i-sms" viewbox="0 0 48 48">
+     <path d="M6 8h36a2 2 0 0 1 2 2v22a2 2 0 0 1-2 2H22l-9 8v-8H6a2 2 0 0 1-2-2V10a2 2 0 0 1 2-2z" fill="var(--primary)">
+     </path>
+     <circle cx="16" cy="21" fill="var(--surface)" r="2.5">
+     </circle>
+     <circle cx="24" cy="21" fill="var(--surface)" r="2.5">
+     </circle>
+     <circle cx="32" cy="21" fill="var(--surface)" r="2.5">
+     </circle>
+    </symbol>
+    <symbol id="i-call" viewbox="0 0 48 48">
+     <path d="M12 8c-2 13 5 28 22 32l6-6-8-6-5 4c-5-2-9-6-11-11l4-4-5-8z" fill="var(--primary)">
+     </path>
+     <path d="M30 8a12 12 0 0 1 10 10M30 15a5 5 0 0 1 3 3" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+    </symbol>
+    <symbol id="i-mask" viewbox="0 0 48 48">
+     <circle cx="24" cy="24" fill="var(--primary)" r="19">
+     </circle>
+     <circle cx="17" cy="21" fill="var(--surface)" r="4">
+     </circle>
+     <circle cx="31" cy="21" fill="var(--surface)" r="4">
+     </circle>
+     <path d="M15 32c5 6 13 6 18 0" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+     </path>
+     <path d="M8 14h32" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-width="3">
+     </path>
+    </symbol>
+    <symbol id="i-cart" viewbox="0 0 48 48">
+     <path d="M4 7h7l5 22h22l4-16H14" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <circle cx="19" cy="38" fill="var(--accent)" r="4">
+     </circle>
+     <circle cx="34" cy="38" fill="var(--accent)" r="4">
+     </circle>
+    </symbol>
+    <symbol id="i-coin" viewbox="0 0 48 48">
+     <circle cx="24" cy="24" fill="var(--accent)" r="19">
+     </circle>
+     <circle cx="24" cy="24" fill="none" r="14" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     </circle>
+     <text fill="#fff" font-family="system-ui" font-size="20" font-weight="700" text-anchor="middle" x="24" y="31">
+      $
+     </text>
+    </symbol>
+    <symbol id="i-robot" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="24" rx="6" width="30" x="9" y="14">
+     </rect>
+     <circle cx="18" cy="26" fill="var(--surface)" r="4">
+     </circle>
+     <circle cx="30" cy="26" fill="var(--surface)" r="4">
+     </circle>
+     <path d="M24 14V8" fill="none" stroke="var(--accent)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+     <circle cx="24" cy="6" fill="var(--accent)" r="3">
+     </circle>
+     <rect fill="var(--accent)" height="8" rx="2" width="4" x="3" y="22">
+     </rect>
+     <rect fill="var(--accent)" height="8" rx="2" width="4" x="41" y="22">
+     </rect>
+    </symbol>
+    <symbol id="i-cloud" viewbox="0 0 48 48">
+     <path d="M14 38a10 10 0 0 1-1-20 12 12 0 0 1 23 3 8.500 8.500 0 0 1-1 17z" fill="var(--primary)">
+     </path>
+    </symbol>
+    <symbol id="i-card" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="26" rx="5" width="40" x="4" y="11">
+     </rect>
+     <rect fill="var(--accent)" height="6" width="40" x="4" y="17">
+     </rect>
+     <rect fill="var(--surface)" height="3" rx="1.5" width="12" x="10" y="29">
+     </rect>
+    </symbol>
+    <symbol id="i-chat" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="20" rx="6" width="28" x="4" y="6">
+     </rect>
+     <path d="M10 26v8l8-8z" fill="var(--primary)">
+     </path>
+     <rect fill="var(--accent)" height="18" rx="6" width="26" x="18" y="20">
+     </rect>
+     <path d="M38 38v7l-7-7z" fill="var(--accent)">
+     </path>
+    </symbol>
+    <symbol id="i-school" viewbox="0 0 48 48">
+     <path d="M24 8L3 19l21 11 21-11z" fill="var(--primary)">
+     </path>
+     <path d="M12 25v9c0 3 6 6 12 6s12-3 12-6v-9l-12 6z" fill="var(--primary2)">
+     </path>
+     <rect fill="var(--accent)" height="14" width="3" x="41" y="19">
+     </rect>
+    </symbol>
+    <symbol id="i-folder" viewbox="0 0 48 48">
+     <path d="M4 12a3 3 0 0 1 3-3h12l5 6h17a3 3 0 0 1 3 3v21a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3z" fill="var(--primary)">
+     </path>
+     <path d="M4 21h40" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2">
+     </path>
+    </symbol>
+    <symbol id="i-leak" viewbox="0 0 48 48">
+     <path d="M24 4C16 16 10 22 10 30a14 14 0 0 0 28 0c0-8-6-14-14-26z" fill="var(--accent)">
+     </path>
+     <path d="M17 31a7 7 0 0 0 7 7" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3">
+     </path>
+    </symbol>
+    <symbol id="i-keyboard" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="26" rx="5" width="42" x="3" y="12">
+     </rect>
+     <g fill="var(--surface)">
+      <rect height="4" width="4" x="8" y="17">
+      </rect>
+      <rect height="4" width="4" x="15" y="17">
+      </rect>
+      <rect height="4" width="4" x="22" y="17">
+      </rect>
+      <rect height="4" width="4" x="29" y="17">
+      </rect>
+      <rect height="4" width="4" x="36" y="17">
+      </rect>
+      <rect height="4" width="4" x="11" y="24">
+      </rect>
+      <rect height="4" width="4" x="18" y="24">
+      </rect>
+      <rect height="4" width="4" x="25" y="24">
+      </rect>
+      <rect height="4" width="4" x="32" y="24">
+      </rect>
+      <rect height="3" width="20" x="14" y="31">
+      </rect>
+     </g>
+    </symbol>
+    <symbol id="i-hash" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="38" rx="4" width="30" x="9" y="5">
+     </rect>
+     <text fill="#fff" font-family="system-ui" font-size="24" font-weight="700" text-anchor="middle" x="24" y="31">
+      #
+     </text>
+    </symbol>
+    <symbol id="i-server" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="14" rx="4" width="34" x="7" y="6">
+     </rect>
+     <rect fill="var(--primary)" height="14" rx="4" width="34" x="7" y="26">
+     </rect>
+     <circle cx="14" cy="13" fill="var(--accent)" r="2">
+     </circle>
+     <circle cx="14" cy="33" fill="var(--accent)" r="2">
+     </circle>
+     <path d="M22 13h14M22 33h14" fill="none" stroke="var(--surface)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5">
+     </path>
+    </symbol>
+    <symbol id="i-browser" viewbox="0 0 48 48">
+     <rect fill="var(--primary)" height="34" rx="5" width="40" x="4" y="7">
+     </rect>
+     <path d="M4 12a5 5 0 0 1 5-5h30a5 5 0 0 1 5 5v4H4z" fill="var(--accent)">
+     </path>
+     <circle cx="10" cy="11.500" fill="var(--surface)" r="1.800">
+     </circle>
+     <circle cx="16" cy="11.500" fill="var(--surface)" r="1.800">
+     </circle>
+    </symbol>
+    <symbol id="i-globe" viewbox="0 0 48 48">
+     <circle cx="24" cy="24" fill="none" r="19" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </circle>
+     <ellipse cx="24" cy="24" fill="none" rx="8" ry="19" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </ellipse>
+     <path d="M5 24h38" fill="none" stroke="var(--primary)" stroke-linecap="round" stroke-linejoin="round" stroke-width="3.5">
+     </path>
+    </symbol>
+    <symbol id="i-check" viewbox="0 0 48 48">
+     <circle cx="24" cy="24" fill="var(--ok)" r="20">
+     </circle>
+     <path d="M14 25l7 7 13-14" fill="none" stroke="#fff" stroke-linecap="round" stroke-linejoin="round" stroke-width="5">
+     </path>
+    </symbol>
+    <symbol id="i-x" viewbox="0 0 48 48">
+     <circle cx="24" cy="24" fill="var(--bad)" r="20">
+     </circle>
+     <path d="M16 16l16 16M32 16L16 32" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="5">
+     </path>
+    </symbol>
+   </defs>
+  </svg>
+  <header>
+   <div class="bar">
+    <span class="brand">
+     <b>
+      <svg aria-hidden="true" viewbox="0 0 48 48">
+       <rect fill="#fff" height="22" rx="5" width="28" x="10" y="21">
+       </rect>
+       <path d="M16 21v-6a8 8 0 0 1 16 0v6" fill="none" stroke="#fff" stroke-linecap="round" stroke-width="4">
+       </path>
+      </svg>
+     </b>
+     Cibersegurança na prática
+    </span>
+    <nav id="nav">
+     <a href="#inicio">
+      Início
+     </a>
+     <a href="#fundamentos">
+      Fundamentos
+     </a>
+     <a href="#protecao">
+      Proteção
+     </a>
+     <a href="#riscos">
+      Riscos e golpes
+     </a>
+     <a href="#teste">
+      Teste-se
+     </a>
+     <button aria-label="Alternar tema claro ou escuro" class="tg" id="tg" type="button">
+      Tema
+     </button>
+    </nav>
+   </div>
+  </header>
+  <main>
+   <section class="view" id="v-inicio">
+    <div class="hero">
+     <div>
+      <span class="tag">
+       Projeto pessoal · FUI · CEFET-MG
+      </span>
+      <h1>
+       Cibersegurança e privacidade de dados
+      </h1>
+      <p>
+       Um guia curto sobre como proteger suas contas e seus dados na internet, reconhecer golpes e entender, na prática, como algumas dessas proteções funcionam. No fim, há jogos para você testar o que aprendeu.
+      </p>
+      <p>
+       <a href="#fundamentos">
+        <button type="button">
+         Começar
+        </button>
+       </a>
+       <a href="#teste">
+        <button class="alt" type="button">
+         Ir aos jogos
+        </button>
+       </a>
+      </p>
+     </div>
+     <svg aria-label="Animação: uma chave percorre o caminho até um cadeado, que confirma o acesso" role="img" viewbox="0 0 300 220">
+      <rect fill="none" height="200" rx="14" stroke="var(--line)" stroke-width="2" width="280" x="10" y="10">
+      </rect>
+      <g class="anim-lock">
+       <rect fill="var(--primary)" height="55" rx="8" width="70" x="190" y="95">
+       </rect>
+       <path d="M205 95v-18a20 20 0 0 1 40 0v18" fill="none" stroke="var(--primary)" stroke-width="8">
+       </path>
+      </g>
+      <g class="anim-key">
+       <circle cx="50" cy="122" fill="none" r="16" stroke="var(--accent)" stroke-width="7">
+       </circle>
+       <rect fill="var(--accent)" height="8" width="55" x="64" y="118">
+       </rect>
+       <rect fill="var(--accent)" height="12" width="7" x="100" y="126">
+       </rect>
+      </g>
+      <g class="anim-ok">
+       <circle cx="225" cy="123" fill="var(--ok)" r="12">
+       </circle>
+       <path d="M219 123l5 5 8-10" fill="none" stroke="#fff" stroke-width="3">
+       </path>
+      </g>
+      <text fill="var(--muted)" font-size="13" text-anchor="middle" x="150" y="190">
+       Autenticação: chave válida, acesso liberado
+      </text>
+     </svg>
+    </div>
+    <div class="duo">
+     <div class="card big">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-shield">
+       </use>
+      </svg>
+      <h3 style="margin:.2rem 0">
+       Cibersegurança
+      </h3>
+      <p>
+       É tudo o que se faz para proteger computadores, celulares, redes e dados contra acessos indevidos e ataques. Vale para o aplicativo do banco, para as redes sociais e para os arquivos que você guarda na nuvem.
+      </p>
+     </div>
+     <div class="card big">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-eye">
+       </use>
+      </svg>
+      <h3 style="margin:.2rem 0">
+       Privacidade de dados
+      </h3>
+      <p>
+       É o direito de saber e de decidir o que acontece com as suas informações: quem coleta, para que usa, por quanto tempo guarda e com quem compartilha. No Brasil, a LGPD (Lei 13.709/2018) estabelece essas regras.
+      </p>
+     </div>
+    </div>
+    <div class="vs">
+     <div class="yes">
+      <strong>
+       A segurança pergunta
+      </strong>
+      <p>
+       Meus dados estão protegidos contra acesso indevido, alteração e perda?
+      </p>
+     </div>
+     <div class="yes">
+      <strong>
+       A privacidade pergunta
+      </strong>
+      <p>
+       Quem decide o que é feito com os meus dados?
+      </p>
+     </div>
+    </div>
+    <h2>
+     Por onde seus dados passam
+    </h2>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-chat">
+       </use>
+      </svg>
+      <strong>
+       Redes sociais
+      </strong>
+      <p>
+       Fotos, contatos e conversas
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-card">
+       </use>
+      </svg>
+      <strong>
+       Banco e Pix
+      </strong>
+      <p>
+       Dinheiro e códigos de acesso
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-cart">
+       </use>
+      </svg>
+      <strong>
+       Compras
+      </strong>
+      <p>
+       Pagamento e endereço
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-cloud">
+       </use>
+      </svg>
+      <strong>
+       Nuvem
+      </strong>
+      <p>
+       Arquivos e documentos
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-school">
+       </use>
+      </svg>
+      <strong>
+       Estudos
+      </strong>
+      <p>
+       E-mail e plataformas
+      </p>
+     </div>
+    </div>
+    <h2>
+     Por onde seguir
+    </h2>
+    <div class="grid">
+     <a class="card" href="#fundamentos">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-doc">
+       </use>
+      </svg>
+      <strong>
+       Fundamentos
+      </strong>
+      <p>
+       Os conceitos, explicados com diagramas.
+      </p>
+     </a>
+     <a class="card" href="#protecao">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-shield">
+       </use>
+      </svg>
+      <strong>
+       Proteção
+      </strong>
+      <p>
+       Camadas de defesa e bons hábitos.
+      </p>
+     </a>
+     <a class="card" href="#riscos">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-mask">
+       </use>
+      </svg>
+      <strong>
+       Riscos e golpes
+      </strong>
+      <p>
+       Como os golpes aparecem e como reconhecê-los.
+      </p>
+     </a>
+     <a class="card" href="#teste">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-key">
+       </use>
+      </svg>
+      <strong>
+       Teste-se
+      </strong>
+      <p>
+       Quiz e jogos práticos.
+      </p>
+     </a>
+    </div>
+   </section>
+   <section class="view" id="v-fundamentos">
+    <div class="ph">
+     <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">
+      Parte 1
+     </span>
+     <h1>
+      Fundamentos
+     </h1>
+     <p>
+      Sete temas curtos. Escolha um nas abas e siga na ordem que preferir.
+     </p>
+    </div>
+    <h2 data-t="Tríade CIA">
+     Tríade CIA
+    </h2>
+    <p>
+     A segurança da informação costuma ser explicada por três princípios.
+    </p>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-lock">
+       </use>
+      </svg>
+      <strong>
+       Confidencialidade
+      </strong>
+      <p>
+       Só vê a informação quem tem autorização, como acontece com a sua conta.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-doc">
+       </use>
+      </svg>
+      <strong>
+       Integridade
+      </strong>
+      <p>
+       O dado não muda sem permissão, como um documento que ninguém altera às escondidas.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-clock">
+       </use>
+      </svg>
+      <strong>
+       Disponibilidade
+      </strong>
+      <p>
+       A informação está lá quando você precisa dela.
+      </p>
+     </div>
+    </div>
+    <h2 data-t="Ameaça e risco">
+     Ameaça, vulnerabilidade e risco
+    </h2>
+    <p>
+     Os três termos se encaixam. Veja um exemplo com senhas.
+    </p>
+    <div class="eq">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-unlock">
+       </use>
+      </svg>
+      <strong>
+       Vulnerabilidade
+      </strong>
+      <p>
+       A fraqueza. Aqui, usar a mesma senha em várias contas.
+      </p>
+     </div>
+     <span class="op">
+      +
+     </span>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-threat">
+       </use>
+      </svg>
+      <strong>
+       Ameaça
+      </strong>
+      <p>
+       Quem pode explorar a fraqueza. Aqui, alguém testando essa senha em outros serviços.
+      </p>
+     </div>
+     <span class="op">
+      =
+     </span>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-burst">
+       </use>
+      </svg>
+      <strong>
+       Risco
+      </strong>
+      <p>
+       O prejuízo possível. Aqui, várias contas comprometidas de uma vez.
+      </p>
+     </div>
+    </div>
+    <h2 data-t="Senhas e HTTPS">
+     Senhas e conexão segura
+    </h2>
+    <h3>
+     O que o sistema faz quando você digita a senha
+    </h3>
+    <div class="flow">
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-keyboard">
+       </use>
+      </svg>
+      Você digita
+      <br/>
+      <code>
+       test
+      </code>
+     </div>
+     <span class="ar">
+      →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-gear">
+       </use>
+      </svg>
+      Função hash
+      <br/>
+      (SHA-256)
+     </div>
+     <span class="ar">
+      →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-hash">
+       </use>
+      </svg>
+      <code>
+       9f86d081…0a08
+      </code>
+     </div>
+     <span class="ar">
+      →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-check">
+       </use>
+      </svg>
+      Compara com o hash guardado
+     </div>
+    </div>
+    <p>
+     O sistema não precisa guardar a sua senha, só o hash dela. Se o hash calculado for igual ao guardado, o acesso é liberado. Como não há como desfazer o cálculo, quem vê o hash não consegue simplesmente ler a senha. Dá para ver isso acontecendo no Laboratório de senhas, em
+     <a href="#teste">
+      Teste-se
+     </a>
+     .
+    </p>
+    <h3>
+     O que o https faz pelo caminho
+    </h3>
+    <div class="flow">
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-browser">
+       </use>
+      </svg>
+      Navegador
+     </div>
+     <span class="ar">
+      → cifrado (TLS) →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-server">
+       </use>
+      </svg>
+      Servidor
+     </div>
+    </div>
+    <p>
+     Quando o endereço começa com https, o TLS cifra os dados no trajeto entre o navegador e o servidor. Isso impede que outras pessoas da mesma rede, como num Wi-Fi público, leiam o que trafega. O cadeado, porém, não prova que o site é de confiança.
+    </p>
+    <h2 data-t="Dados pessoais">
+     Dados pessoais e sensíveis
+    </h2>
+    <h3>
+     Dados pessoais
+    </h3>
+    <p>
+     São informações que identificam uma pessoa, sozinhas ou combinadas com outras.
+    </p>
+    <div class="chips">
+     <span class="chip">
+      Nome
+     </span>
+     <span class="chip">
+      CPF
+     </span>
+     <span class="chip">
+      RG
+     </span>
+     <span class="chip">
+      Endereço
+     </span>
+     <span class="chip">
+      Telefone
+     </span>
+     <span class="chip">
+      E-mail
+     </span>
+     <span class="chip">
+      Data de nascimento
+     </span>
+     <span class="chip">
+      Localização
+     </span>
+     <span class="chip">
+      Fotografias
+     </span>
+     <span class="chip">
+      Endereço IP (conforme o contexto)
+     </span>
+    </div>
+    <h3>
+     Dados sensíveis
+    </h3>
+    <p>
+     A LGPD trata essas categorias com regras mais rígidas.
+    </p>
+    <div class="chips">
+     <span class="chip s">
+      Origem racial ou étnica
+     </span>
+     <span class="chip s">
+      Convicção religiosa
+     </span>
+     <span class="chip s">
+      Opinião política
+     </span>
+     <span class="chip s">
+      Filiação sindical
+     </span>
+     <span class="chip s">
+      Saúde
+     </span>
+     <span class="chip s">
+      Vida sexual
+     </span>
+     <span class="chip s">
+      Dados genéticos
+     </span>
+     <span class="chip s">
+      Biometria
+     </span>
+    </div>
+    <h2 data-t="LGPD">
+     LGPD
+    </h2>
+    <h3>
+     Quem participa
+    </h3>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-user">
+       </use>
+      </svg>
+      <strong>
+       Titular
+      </strong>
+      <p>
+       Dono dos dados
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-building">
+       </use>
+      </svg>
+      <strong>
+       Controlador
+      </strong>
+      <p>
+       Decide como os dados são tratados
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-gear">
+       </use>
+      </svg>
+      <strong>
+       Operador
+      </strong>
+      <p>
+       Trata os dados em nome do controlador
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-bank">
+       </use>
+      </svg>
+      <strong>
+       ANPD
+      </strong>
+      <p>
+       Fiscaliza o cumprimento da lei
+      </p>
+     </div>
+    </div>
+    <h3>
+     O que você pode pedir
+    </h3>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-search">
+       </use>
+      </svg>
+      <strong>
+       Acessar
+      </strong>
+      <p>
+       Confirmar se tratam seus dados e consultá-los
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-edit">
+       </use>
+      </svg>
+      <strong>
+       Corrigir
+      </strong>
+      <p>
+       Dados errados ou desatualizados
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-trash">
+       </use>
+      </svg>
+      <strong>
+       Eliminar
+      </strong>
+      <p>
+       Dados desnecessários ou excessivos
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-share">
+       </use>
+      </svg>
+      <strong>
+       Saber
+      </strong>
+      <p>
+       Com quem seus dados foram compartilhados
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-undo">
+       </use>
+      </svg>
+      <strong>
+       Revogar
+      </strong>
+      <p>
+       Retirar o consentimento
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-scale">
+       </use>
+      </svg>
+      <strong>
+       Revisar
+      </strong>
+      <p>
+       Decisões tomadas só por sistemas automáticos
+      </p>
+     </div>
+    </div>
+    <h3>
+     O que a lei exige de quem usa seus dados
+    </h3>
+    <div class="chips">
+     <span class="chip">
+      Finalidade
+     </span>
+     <span class="chip">
+      Adequação
+     </span>
+     <span class="chip">
+      Necessidade
+     </span>
+     <span class="chip">
+      Transparência
+     </span>
+     <span class="chip">
+      Segurança
+     </span>
+     <span class="chip">
+      Prevenção
+     </span>
+     <span class="chip">
+      Responsabilização
+     </span>
+    </div>
+    <h2 data-t="Cookies">
+     Cookies e rastreamento
+    </h2>
+    <p>
+     Cookies são pequenos registros que o navegador guarda. Muitos são úteis, como os que mantêm você conectado ou lembram o carrinho de compras. O problema são os que acompanham a sua navegação para montar um perfil.
+    </p>
+    <div class="flow">
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-globe">
+       </use>
+      </svg>
+      Você visita um site
+     </div>
+     <span class="ar">
+      →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-cookie">
+       </use>
+      </svg>
+      O navegador guarda um cookie
+     </div>
+     <span class="ar">
+      →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-refresh">
+       </use>
+      </svg>
+      Na próxima visita, o site reconhece você
+     </div>
+    </div>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-hourglass">
+       </use>
+      </svg>
+      <strong>
+       Sessão
+      </strong>
+      <p>
+       Dura enquanto você navega
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-pin">
+       </use>
+      </svg>
+      <strong>
+       Persistente
+      </strong>
+      <p>
+       Fica até vencer ou ser apagado
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-home">
+       </use>
+      </svg>
+      <strong>
+       Próprio
+      </strong>
+      <p>
+       Definido pelo site que você visita
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-eye">
+       </use>
+      </svg>
+      <strong>
+       De terceiros
+      </strong>
+      <p>
+       Definido por outro domínio, como o de anúncios
+      </p>
+     </div>
+    </div>
+    <div class="card" style="display:flex;gap:1rem;align-items:center">
+     <svg aria-hidden="true" class="ico">
+      <use href="#i-fp">
+      </use>
+     </svg>
+     <p style="margin:0">
+      Mesmo sem cookies, é possível reconhecer um aparelho pela combinação de sistema, navegador, idioma e configurações. Essa técnica se chama
+      <strong>
+       fingerprinting
+      </strong>
+      .
+     </p>
+    </div>
+    <h2 data-t="No cotidiano">
+     Por que isso importa no dia a dia
+    </h2>
+    <p>
+     Pense em um dia comum conectado. É só um exemplo, mas mostra quantas vezes seus dados circulam.
+    </p>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-chat">
+       </use>
+      </svg>
+      <strong>
+       De manhã
+      </strong>
+      <p>
+       Mensagens e redes sociais
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-card">
+       </use>
+      </svg>
+      <strong>
+       Ao meio-dia
+      </strong>
+      <p>
+       Compras e Pix
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-school">
+       </use>
+      </svg>
+      <strong>
+       À tarde
+      </strong>
+      <p>
+       Estudos e e-mail
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-cloud">
+       </use>
+      </svg>
+      <strong>
+       À noite
+      </strong>
+      <p>
+       Fotos e arquivos na nuvem
+      </p>
+     </div>
+    </div>
+    <div class="card">
+     <p>
+      Em cada uma dessas etapas, seus dados passam por uma plataforma. Quando faltam cuidados, eles ficam expostos a golpes e a acessos indevidos. E nem a melhor senha ajuda se a pessoa for enganada e entregar a informação por conta própria. Por isso, saber reconhecer golpes também faz parte da segurança.
+     </p>
+    </div>
+   </section>
+   <section class="view" id="v-protecao">
+    <div class="ph">
+     <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">
+      Parte 2
+     </span>
+     <h1>
+      Proteção
+     </h1>
+     <p>
+      Camadas de defesa, hábitos que valem a pena e o que fazer se algo der errado.
+     </p>
+    </div>
+    <h2 data-t="Camadas">
+     Camadas de defesa
+    </h2>
+    <svg aria-label="Camadas de defesa, de fora para dentro: atenção a golpes, atualizações e cópias, autenticação em dois fatores, senha forte, dados" class="layers" role="img" viewbox="0 0 300 300">
+     <circle cx="150" cy="150" fill="var(--soft)" r="140" stroke="var(--primary2)" stroke-width="2">
+     </circle>
+     <circle cx="150" cy="150" fill="var(--surface)" r="108" stroke="var(--primary2)" stroke-width="2">
+     </circle>
+     <circle cx="150" cy="150" fill="var(--soft)" r="76" stroke="var(--primary2)" stroke-width="2">
+     </circle>
+     <circle cx="150" cy="150" fill="var(--surface)" r="46" stroke="var(--primary2)" stroke-width="2">
+     </circle>
+     <circle cx="150" cy="150" fill="var(--primary)" r="22">
+     </circle>
+     <text text-anchor="middle" x="150" y="30">
+      Atenção a golpes
+     </text>
+     <text text-anchor="middle" x="150" y="62">
+      Atualizações e backups
+     </text>
+     <text text-anchor="middle" x="150" y="94">
+      2FA
+     </text>
+     <text text-anchor="middle" x="150" y="124">
+      Senha forte
+     </text>
+     <text style="fill:#fff" text-anchor="middle" x="150" y="154">
+      Dados
+     </text>
+    </svg>
+    <p class="muted" style="text-align:center">
+     Se uma camada falha, as outras ainda protegem. Nenhuma funciona bem sozinha.
+    </p>
+    <h2 data-t="Mecanismos">
+     Mecanismos de proteção
+    </h2>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-key">
+       </use>
+      </svg>
+      <strong>
+       Senhas fortes e únicas
+      </strong>
+      <p>
+       Longas, difíceis de adivinhar e diferentes em cada conta. Uma frase com várias palavras sem relação costuma ser fácil de lembrar.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-vault">
+       </use>
+      </svg>
+      <strong>
+       Gerenciador de senhas
+      </strong>
+      <p>
+       Guarda e gera as senhas por você. Só exige uma senha mestra, que merece cuidado extra.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-phone">
+       </use>
+      </svg>
+      <strong>
+       Dois fatores (2FA)
+      </strong>
+      <p>
+       Pede um segundo comprovante além da senha, como um código temporário.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-refresh">
+       </use>
+      </svg>
+      <strong>
+       Atualizações
+      </strong>
+      <p>
+       Mantenha o sistema e os aplicativos em dia.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-disk">
+       </use>
+      </svg>
+      <strong>
+       Cópias de segurança
+      </strong>
+      <p>
+       Guarde os arquivos importantes em mais de um lugar.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-link">
+       </use>
+      </svg>
+      <strong>
+       Conferir links
+      </strong>
+      <p>
+       Olhe o endereço antes de informar qualquer dado.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-eyeoff">
+       </use>
+      </svg>
+      <strong>
+       Privacidade
+      </strong>
+      <p>
+       Revise permissões de aplicativos, cookies e configurações das redes sociais.
+      </p>
+     </div>
+    </div>
+    <p class="muted">
+     Dá para praticar três deles em
+     <a href="#teste">
+      Teste-se
+     </a>
+     : Leia o endereço, Laboratório de senhas e Simulador de 2FA.
+    </p>
+    <h2 data-t="Vantagens">
+     Vantagens de adotar bons hábitos
+    </h2>
+    <div class="vs">
+     <div class="no">
+      <strong>
+       Sem esses hábitos
+      </strong>
+      <p>
+       <svg aria-hidden="true" class="ico s">
+        <use href="#i-x">
+        </use>
+       </svg>
+       Um vazamento compromete várias contas.
+      </p>
+      <p>
+       <svg aria-hidden="true" class="ico s">
+        <use href="#i-x">
+        </use>
+       </svg>
+       Só a senha basta para invadir.
+      </p>
+      <p>
+       <svg aria-hidden="true" class="ico s">
+        <use href="#i-x">
+        </use>
+       </svg>
+       A pressa leva ao clique errado.
+      </p>
+      <p>
+       <svg aria-hidden="true" class="ico s">
+        <use href="#i-x">
+        </use>
+       </svg>
+       Um problema no aparelho pode apagar tudo.
+      </p>
+     </div>
+     <div class="yes">
+      <strong>
+       Com esses hábitos
+      </strong>
+      <p>
+       <svg aria-hidden="true" class="ico s">
+        <use href="#i-check">
+        </use>
+       </svg>
+       Um vazamento fica restrito a um serviço.
+      </p>
+      <p>
+       <svg aria-hidden="true" class="ico s">
+        <use href="#i-check">
+        </use>
+       </svg>
+       O segundo fator barra quem só tem a senha.
+      </p>
+      <p>
+       <svg aria-hidden="true" class="ico s">
+        <use href="#i-check">
+        </use>
+       </svg>
+       Verificar antes interrompe o golpe.
+      </p>
+      <p>
+       <svg aria-hidden="true" class="ico s">
+        <use href="#i-check">
+        </use>
+       </svg>
+       As cópias permitem recuperar os arquivos.
+      </p>
+     </div>
+    </div>
+    <h2 data-t="Regra de ouro">
+     Regra de ouro
+    </h2>
+    <p>
+     Para quase todo golpe, três passos resolvem.
+    </p>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-stop">
+       </use>
+      </svg>
+      <strong>
+       Pare
+      </strong>
+      <p>
+       Golpes dependem de pressa. Antes de clicar, pagar ou passar um código, respire.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-search">
+       </use>
+      </svg>
+      <strong>
+       Verifique
+      </strong>
+      <p>
+       Veja o link, o remetente e se o pedido faz sentido.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-call">
+       </use>
+      </svg>
+      <strong>
+       Confirme
+      </strong>
+      <p>
+       Fale com a pessoa ou com a empresa por um canal que você já conhece.
+      </p>
+     </div>
+    </div>
+    <h2 data-t="Se a senha vazou">
+     Se a senha vazou
+    </h2>
+    <p>
+     Se desconfiar que uma senha foi exposta, faça nesta ordem.
+    </p>
+    <div class="stepper">
+     <div class="st">
+      <b>
+       1
+      </b>
+      <p>
+       Troque a senha da conta afetada.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       2
+      </b>
+      <p>
+       Troque a mesma senha nos outros serviços em que ela aparece.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       3
+      </b>
+      <p>
+       Ative a verificação em dois fatores.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       4
+      </b>
+      <p>
+       Procure acessos que você não reconhece.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       5
+      </b>
+      <p>
+       Confira se os dados de recuperação da conta continuam corretos.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="view" id="v-riscos">
+    <div class="ph">
+     <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">
+      Parte 3
+     </span>
+     <h1>
+      Riscos e golpes
+     </h1>
+     <p>
+      O que pode acontecer sem proteção e como os golpes costumam aparecer.
+     </p>
+    </div>
+    <h2 data-t="Riscos">
+     Riscos de não usar proteção
+    </h2>
+    <div class="flow">
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-leak">
+       </use>
+      </svg>
+      Vazamento em um serviço
+     </div>
+     <span class="ar">
+      →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-key">
+       </use>
+      </svg>
+      Mesma senha em outras contas
+     </div>
+     <span class="ar">
+      →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-unlock">
+       </use>
+      </svg>
+      Contas invadidas
+     </div>
+     <span class="ar">
+      →
+     </span>
+     <div class="node">
+      <svg aria-hidden="true" class="ico s big">
+       <use href="#i-coin">
+       </use>
+      </svg>
+      Fraude
+     </div>
+    </div>
+    <p class="muted" style="text-align:center">
+     Testar de forma automática, em vários serviços, senhas que já vazaram se chama credential stuffing.
+    </p>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-folder">
+       </use>
+      </svg>
+      <strong>
+       Vazamento de dados
+      </strong>
+      <p>
+       Nomes, e-mails e telefones expostos
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-unlock">
+       </use>
+      </svg>
+      <strong>
+       Contas invadidas
+      </strong>
+      <p>
+       Acesso por quem não tem autorização
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-coin">
+       </use>
+      </svg>
+      <strong>
+       Prejuízo financeiro
+      </strong>
+      <p>
+       Perda de dinheiro e de códigos
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-mask">
+       </use>
+      </svg>
+      <strong>
+       Uso da sua identidade
+      </strong>
+      <p>
+       Golpes aplicados em seu nome
+      </p>
+     </div>
+    </div>
+    <h2 data-t="Golpes no Brasil">
+     Golpes mais citados no Brasil
+    </h2>
+    <p>
+     Para dimensionar o problema, vale olhar números reais. A 17ª edição do Observatório Febraban, pesquisa feita pelo Ipespe a pedido da Federação Brasileira de Bancos e divulgada em julho de 2025, ouviu 3.000 pessoas. Nela, 39% dos entrevistados disseram ter sido vítimas ou alvo de tentativa de golpe envolvendo contas bancárias, o maior percentual da série histórica do levantamento.
+    </p>
+    <figure class="figure">
+     <img alt="Gráfico de barras horizontais com os tipos de golpes digitais mais citados no Brasil: clonagem ou troca de cartão, 45; golpe pelo WhatsApp, 34; falsa central telefônica, 31; golpe do Pix, 24; uso indevido do CPF por SMS, 13; leilão ou loja virtual falsa, 10." loading="lazy" src="../Evidencias/Bloco-3C/grafico_datawrapper.png"/>
+     <figcaption>
+      Gráfico feito no Datawrapper a partir dos dados do Observatório Febraban, julho de 2025. Valores em porcentagem de citações.
+     </figcaption>
+    </figure>
+    <p class="muted">
+     Como ler: cada barra indica a porcentagem de menções à modalidade. Os seis valores somam 157%, o que indica que os entrevistados puderam citar mais de um tipo de golpe.
+    </p>
+    <div class="scroll">
+     <table>
+      <tr>
+       <th>
+        Posição
+       </th>
+       <th>
+        Tipo de golpe
+       </th>
+       <th>
+        Citações (%)
+       </th>
+      </tr>
+      <tr>
+       <td>
+        1
+       </td>
+       <td>
+        Clonagem ou troca de cartão
+       </td>
+       <td>
+        45
+       </td>
+      </tr>
+      <tr>
+       <td>
+        2
+       </td>
+       <td>
+        Golpe pelo WhatsApp
+       </td>
+       <td>
+        34
+       </td>
+      </tr>
+      <tr>
+       <td>
+        3
+       </td>
+       <td>
+        Falsa central telefônica
+       </td>
+       <td>
+        31
+       </td>
+      </tr>
+      <tr>
+       <td>
+        4
+       </td>
+       <td>
+        Golpe do Pix
+       </td>
+       <td>
+        24
+       </td>
+      </tr>
+      <tr>
+       <td>
+        5
+       </td>
+       <td>
+        Uso indevido do CPF por SMS
+       </td>
+       <td>
+        13
+       </td>
+      </tr>
+      <tr>
+       <td>
+        6
+       </td>
+       <td>
+        Leilão ou loja virtual falsa
+       </td>
+       <td>
+        10
+       </td>
+      </tr>
+     </table>
+    </div>
+    <h3>
+     O que cada golpe do gráfico tem a ver com o que você viu
+    </h3>
+    <div class="tiles">
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-card">
+       </use>
+      </svg>
+      <strong>
+       Clonagem ou troca de cartão
+      </strong>
+      <p>
+       Inclui a troca do cartão na hora da devolução, em compras presenciais, e aparelhos instalados sobre o leitor de cartão para copiar os dados. A Febraban alerta que nenhum banco pede o cartão de volta nem envia alguém para buscá-lo.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-chat">
+       </use>
+      </svg>
+      <strong>
+       Golpe pelo WhatsApp
+      </strong>
+      <p>
+       Em geral, o criminoso se passa por alguém da sua lista de contatos, avisa que trocou de número e pede dinheiro. É o perfil falso da aba de exemplos.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-call">
+       </use>
+      </svg>
+      <strong>
+       Falsa central telefônica
+      </strong>
+      <p>
+       Alguém liga dizendo ser do banco, aponta uma compra suspeita ou invasão da conta e pede dados ou códigos. Se desconfiar, desligue e ligue para o número oficial do banco.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-coin">
+       </use>
+      </svg>
+      <strong>
+       Golpe do Pix
+      </strong>
+      <p>
+       Um dos formatos mais recentes é o Pix feito “por engano”, com pedido de devolução. Confira na sua conta se o valor realmente entrou antes de devolver ou entregar algo.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-sms">
+       </use>
+      </svg>
+      <strong>
+       Uso indevido do CPF por SMS
+      </strong>
+      <p>
+       Envolve mensagens de texto que usam o CPF da vítima. Como em qualquer SMS inesperado, não clique em links e consulte o serviço pelo canal oficial.
+      </p>
+     </div>
+     <div class="tile">
+      <svg aria-hidden="true" class="ico">
+       <use href="#i-cart">
+       </use>
+      </svg>
+      <strong>
+       Leilão ou loja virtual falsa
+      </strong>
+      <p>
+       Anúncios e lojas que não entregam o produto. Pesquise a reputação do vendedor e desconfie de preço muito abaixo do normal.
+      </p>
+     </div>
+    </div>
+    <div class="card">
+     <p>
+      <strong>
+       O ponto em comum.
+      </strong>
+      Segundo as reportagens sobre a pesquisa, todos esses golpes usam engenharia social: convencem a pessoa a agir, em vez de explorar uma falha técnica. Por isso a defesa passa por parar, verificar e confirmar, como visto em
+      <a href="#protecao">
+       Proteção
+      </a>
+      .
+     </p>
+    </div>
+    <h2 data-t="Engenharia social">
+     Como a engenharia social funciona
+    </h2>
+    <p>
+     Em vez de atacar o sistema, o golpista ataca a pessoa. Ele usa emoções para que você aja antes de verificar.
+    </p>
+    <div class="bub">
+     <div style="background:#6d28d9">
+      <b>
+       Medo
+      </b>
+      “Sua conta será bloqueada.”
+     </div>
+     <div style="background:#a21caf">
+      <b>
+       Urgência
+      </b>
+      “Responda agora.”
+     </div>
+     <div style="background:#1d4ed8">
+      <b>
+       Confiança
+      </b>
+      “Sou do seu banco.”
+     </div>
+     <div style="background:#0f766e">
+      <b>
+       Curiosidade
+      </b>
+      “Veja quem visitou seu perfil.”
+     </div>
+     <div style="background:#b45309">
+      <b>
+       Ganância
+      </b>
+      “Prêmio garantido, retire já.”
+     </div>
+     <div style="background:#be185d">
+      <b>
+       Solidariedade
+      </b>
+      “Preciso de ajuda, é uma emergência.”
+     </div>
+    </div>
+    <h2 data-t="Exemplos de golpes">
+     Exemplos de golpes
+    </h2>
+    <p class="muted">
+     Situações como estas aparecem nos fascículos do CERT.br e em materiais do NIC.br. As mensagens abaixo foram escritas como exemplo. Escolha um tipo.
+    </p>
+    <div class="tabs" id="gpt">
+    </div>
+    <div class="phone" id="gpv">
+    </div>
+    <h2 data-t="Anatomia de um phishing">
+     Anatomia de um phishing
+    </h2>
+    <p class="muted">
+     Toque nas partes destacadas do e-mail fictício.
+    </p>
+    <div class="mail">
+     <div class="h">
+      De:
+      <span class="hot" data-i="0">
+       atendimento@banco-exemplo-seguranca.example
+      </span>
+      <br/>
+      Assunto:
+      <span class="hot" data-i="1">
+       URGENTE: conta bloqueada
+      </span>
+     </div>
+     <div class="bd">
+      <p>
+       Detectamos um acesso suspeito. Atualize seus dados
+       <span class="hot" data-i="2">
+        em até 2 horas
+       </span>
+       ou sua conta será bloqueada.
+      </p>
+      <p>
+       <span class="hot" data-i="3">
+        [ Atualizar agora ]
+       </span>
+      </p>
+     </div>
+    </div>
+    <div class="fb" id="ana">
+     Escolha uma parte destacada.
+    </div>
+    <h3>
+     Outros sinais de alerta
+    </h3>
+    <div class="chips">
+     <span class="chip s">
+      Pedido de senha ou código
+     </span>
+     <span class="chip s">
+      Ameaça de bloqueio
+     </span>
+     <span class="chip s">
+      Oferta boa demais
+     </span>
+     <span class="chip s">
+      Conhecido com número novo
+     </span>
+     <span class="chip s">
+      Pedido de dinheiro sem como confirmar
+     </span>
+    </div>
+    <p class="muted">
+     Nem todo golpe tem erros de escrita. Alguns são bem elaborados e usam dados reais da vítima.
+    </p>
+    <h2 data-t="Golpes mais citados">
+     Golpes mais citados
+    </h2>
+    <p>
+     O gráfico mostra os tipos de golpe digital mais citados em um levantamento do Observatório FEBRABAN. Alguns têm relação direta com os exemplos da aba anterior, como o golpe do Pix, a falsa central telefônica e a loja virtual falsa.
+    </p>
+    <div class="card">
+     <h3 style="margin-top:0">
+      Tipos de golpes digitais mais citados no Brasil
+     </h3>
+     <p class="muted">
+      Dados do Observatório FEBRABAN, julho de 2025.
+     </p>
+     <div aria-label="Gráfico de barras: clonagem ou troca de cartão 45, golpe pelo WhatsApp 34, falsa central telefônica 31, golpe do Pix 24, uso indevido do CPF por SMS 13, leilão ou loja virtual falsa 10" class="hbars" role="img">
+      <div class="row">
+       <span class="l">
+        Clonagem ou troca de cartão
+       </span>
+       <span class="b" style="width:100%">
+        45
+       </span>
+      </div>
+      <div class="row">
+       <span class="l">
+        Golpe pelo WhatsApp
+       </span>
+       <span class="b" style="width:75.6%">
+        34
+       </span>
+      </div>
+      <div class="row">
+       <span class="l">
+        Falsa central telefônica
+       </span>
+       <span class="b" style="width:68.9%">
+        31
+       </span>
+      </div>
+      <div class="row">
+       <span class="l">
+        Golpe do Pix
+       </span>
+       <span class="b" style="width:53.3%">
+        24
+       </span>
+      </div>
+      <div class="row">
+       <span class="l">
+        Uso indevido do CPF por SMS
+       </span>
+       <span class="b" style="width:28.9%">
+        13
+       </span>
+      </div>
+      <div class="row">
+       <span class="l">
+        Leilão ou loja virtual falsa
+       </span>
+       <span class="b" style="width:22.2%">
+        10
+       </span>
+      </div>
+     </div>
+     <p class="muted" style="margin-top:.8rem">
+      Fonte: Observatório FEBRABAN, julho de 2025. Gráfico original feito no Datawrapper.
+     </p>
+    </div>
+    <p>
+     Clonagem ou troca de cartão aparece no topo, com 45, e leilão ou loja virtual falsa fica por último, com 10. Os golpes que dependem de contato direto, por WhatsApp ou por telefone, ocupam o segundo e o terceiro lugar.
+    </p>
+    <h2 data-t="Se caiu em um golpe">
+     Se caiu em um golpe
+    </h2>
+    <p>
+     Quanto antes você agir, melhor.
+    </p>
+    <div class="stepper">
+     <div class="st">
+      <b>
+       1
+      </b>
+      <p>
+       Troque as senhas das contas que possam ter sido afetadas.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       2
+      </b>
+      <p>
+       Fale com o banco ou a instituição pelos canais oficiais.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       3
+      </b>
+      <p>
+       Verifique movimentações suspeitas.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       4
+      </b>
+      <p>
+       Avise as plataformas envolvidas.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       5
+      </b>
+      <p>
+       Guarde mensagens e comprovantes.
+      </p>
+     </div>
+     <div class="st">
+      <b>
+       6
+      </b>
+      <p>
+       Alerte pessoas próximas, caso alguém use a sua identidade.
+      </p>
+     </div>
+    </div>
+   </section>
+   <section class="view" id="v-teste">
+    <div class="ph">
+     <span class="tag" style="background:rgba(255,255,255,.2);color:#fff">
+      Parte 4
+     </span>
+     <h1>
+      Teste seus conhecimentos
+     </h1>
+     <p>
+      Seis atividades. As simples revisam o conteúdo; as técnicas mostram o mecanismo funcionando no seu navegador.
+     </p>
+    </div>
+    <h2 class="gt" data-t="1 · Quiz">
+     <span class="n">
+      1
+     </span>
+     Quiz geral
+    </h2>
+    <div class="card" id="quiz">
+    </div>
+    <h2 class="gt" data-t="2 · Golpe ou não?">
+     <span class="n">
+      2
+     </span>
+     Golpe ou não?
+    </h2>
+    <div class="card" id="scam">
+     <p class="muted">
+      Mensagens fictícias, criadas para este site.
+     </p>
+    </div>
+    <h2 class="gt" data-t="3 · Endereço">
+     <span class="n">
+      3
+     </span>
+     Leia o endereço
+     <span class="tag">
+      técnico
+     </span>
+    </h2>
+    <div class="card" id="url">
+    </div>
+    <h2 class="gt" data-t="4 · Senhas">
+     <span class="n">
+      4
+     </span>
+     Laboratório de senhas
+     <span class="tag">
+      técnico
+     </span>
+    </h2>
+    <div class="card">
+     <p class="muted">
+      Use uma senha fictícia. A análise ocorre no seu navegador; nada é enviado a servidores.
+     </p>
+     <input autocomplete="off" id="pw" placeholder="Digite uma senha de teste" type="text"/>
+     <ul class="rl" id="rules">
+     </ul>
+     <div class="meter">
+      <i id="mt">
+      </i>
+     </div>
+     <p>
+      <strong id="lv">
+       Aguardando entrada
+      </strong>
+     </p>
+     <p class="muted" id="ent">
+     </p>
+     <p>
+      SHA-256 da senha:
+      <code id="h1">
+       …
+      </code>
+     </p>
+     <p>
+      Com um “1” acrescentado ao final:
+      <code id="h2">
+       …
+      </code>
+     </p>
+     <p class="muted" id="diff">
+     </p>
+     <p class="muted">
+      Como ler: a estimativa de tempo supõe caracteres escolhidos ao acaso e 10 bilhões de tentativas por segundo (valor hipotético para ataque a hashes obtidos em vazamento). Senhas com padrão previsível resistem menos do que o número indica. O efeito de mudar poucos bits no hash vem do projeto da função: uma pequena mudança na entrada altera cerca de metade dos bits da saída.
+     </p>
+    </div>
+    <h2 class="gt" data-t="5 · 2FA">
+     <span class="n">
+      5
+     </span>
+     Simulador de 2FA
+     <span class="tag">
+      técnico
+     </span>
+    </h2>
+    <div class="card">
+     <p>
+      Aplicativos autenticadores geram códigos com o algoritmo TOTP (RFC 6238): o servidor e o aplicativo compartilham um segredo e calculam o mesmo código a partir da hora.
+     </p>
+     <p class="otp-code" id="otp">
+      ······
+     </p>
+     <div class="meter">
+      <i id="otm" style="width:100%;background:var(--primary)">
+      </i>
+     </div>
+     <p class="muted" id="otd">
+     </p>
+     <p>
+      Passos: (1) contador = tempo Unix ÷ 30 s; (2) HMAC-SHA1 do contador com o segredo; (3) truncamento dinâmico para 31 bits; (4) resto da divisão por 1.000.000.
+     </p>
+     <p>
+      Simule um login: a senha já está correta. Digite o código atual.
+     </p>
+     <div class="pair">
+      <input id="oin" inputmode="numeric" maxlength="6" placeholder="000000" style="max-width:140px" type="text"/>
+      <button id="ob" type="button">
+       Entrar
+      </button>
+     </div>
+     <div id="of">
+     </div>
+     <p class="muted">
+      O segredo desta demonstração é fixo e público no código da página; em uso real ele é aleatório e fica só no aplicativo e no servidor.
+     </p>
+    </div>
+    <h2 class="gt" data-t="6 · Termos">
+     <span class="n">
+      6
+     </span>
+     Ligue os termos
+    </h2>
+    <div class="card" id="match">
+    </div>
+   </section>
+  </main>
+  <footer>
+   <p>
+    Projeto pessoal · Fundamentos de Informática · CEFET-MG Divinópolis
+   </p>
+   <details class="src" style="max-width:640px;margin:auto;text-align:left">
+    <summary>
+     Fontes consultadas
+    </summary>
+    <ul>
+     <li>
+      CERT.br. Cartilha de Segurança para Internet e fascículos.
+      <a href="https://cartilha.cert.br/" rel="noopener" target="_blank">
+       cartilha.cert.br
+      </a>
+     </li>
+     <li>
+      NIST. Digital Identity Guidelines, SP 800-63B.
+      <a href="https://pages.nist.gov/800-63-4/sp800-63b.html" rel="noopener" target="_blank">
+       pages.nist.gov
+      </a>
+     </li>
+     <li>
+      Observatório FEBRABAN. Tipos de golpes digitais mais citados no Brasil, julho de 2025.
+     </li>
+     <li>
+      NIC.br. Cidadão na Rede.
+      <a href="https://cidadaonarede.nic.br/" rel="noopener" target="_blank">
+       cidadaonarede.nic.br
+      </a>
+     </li>
+     <li>
+      Brasil. Lei 13.709/2018 (LGPD).
+      <a href="https://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/l13709.htm" rel="noopener" target="_blank">
+       planalto.gov.br
+      </a>
+     </li>
+     <li>
+      ANPD. Perguntas frequentes, direitos dos titulares e guia de cookies.
+      <a href="https://www.gov.br/anpd/" rel="noopener" target="_blank">
+       gov.br/anpd
+      </a>
+     </li>
+     <li>
+      Observatório Febraban, 17ª edição (Ipespe), julho de 2025, conforme
+      <a href="https://www.folhape.com.br/economia/golpes-digitais-ficam-mais-sofisticados-e-tecnologia-amplia-risco-de/501059/" rel="noopener" target="_blank">
+       Folha de Pernambuco
+      </a>
+      .
+     </li>
+     <li>
+      Serasa. Guia de proteção contra fraudes financeiras.
+      <a href="https://www.serasa.com.br/guias/como-proteger-meu-cpf-de-fraudes/" rel="noopener" target="_blank">
+       serasa.com.br
+      </a>
+     </li>
+     <li>
+      Fast Company Brasil. 10 golpes mais aplicados contra clientes de bancos.
+      <a href="https://fastcompanybrasil.com/?p=215068" rel="noopener" target="_blank">
+       fastcompanybrasil.com
+      </a>
+     </li>
+     <li>
+      IETF. RFC 6238, TOTP.
+      <a href="https://www.rfc-editor.org/rfc/rfc6238" rel="noopener" target="_blank">
+       rfc-editor.org
+      </a>
+     </li>
+    </ul>
+   </details>
+  </footer>
+  <script src="script.js">
+  </script>
+ </body>
 </html>
